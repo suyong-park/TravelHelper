@@ -5,16 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.hanium.travel.CollectMyDataActivity;
 import com.hanium.travel.R;
 
 public class MyData1Fragment extends Fragment {
+
+    ImageView car_image;
+    ImageView public_image;
+    ImageView bike_image;
+    ImageView walk_image;
 
     MaterialCardView car_card;
     MaterialCardView public_card;
@@ -26,10 +33,20 @@ public class MyData1Fragment extends Fragment {
 
         ((CollectMyDataActivity) getActivity()).setButton();
 
+        car_image = view.findViewById(R.id.car_image);
+        public_image = view.findViewById(R.id.public_image);
+        bike_image = view.findViewById(R.id.bike_image);
+        walk_image = view.findViewById(R.id.walk_image);
+
         car_card = view.findViewById(R.id.car_card);
         bike_card = view.findViewById(R.id.bike_card);
         public_card = view.findViewById(R.id.public_card);
         walk_card = view.findViewById(R.id.walk_card);
+
+        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(car_image);
+        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(public_image);
+        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(bike_image);
+        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(walk_image);
 
         car_card.setOnClickListener(onClickListener);
         bike_card.setOnClickListener(onClickListener);

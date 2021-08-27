@@ -2,18 +2,21 @@ package com.hanium.travel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 
 import stream.customalert.CustomAlertDialogue;
 
 public class MainActivity extends AppCompatActivity {
 
+    ImageView recommend_image;
+    ImageView plan_image;
     MaterialCardView recommend_card;
     MaterialCardView plan_card;
 
@@ -21,12 +24,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*
 
         recommend_card = findViewById(R.id.recommend_card);
         plan_card = findViewById(R.id.plan_card);
 
+        Glide.with(this).load(R.drawable.ic_launcher_foreground).into(recommend_image);
+        Glide.with(this).load(R.drawable.ic_launcher_foreground).into(plan_image);
+
         recommend_card.setOnClickListener(onClickListener);
         plan_card.setOnClickListener(onClickListener);
+
+         */
     }
 
     @Override
@@ -39,44 +48,28 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveText("종료할게요")
                 .setPositiveColor(R.color.negative)
                 .setPositiveTypeface(Typeface.DEFAULT_BOLD)
-                .setOnPositiveClicked(new CustomAlertDialogue.OnPositiveClicked() {
-                    @Override
-                    public void OnClick(View view, Dialog dialog) {
-                        dialog.dismiss();
-                        moveTaskToBack(true);
-                        finishAndRemoveTask();
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                    }
-                })
+                .setOnPositiveClicked((view, dialog) -> dialog.dismiss())
                 .setNegativeText("좀 더 볼게요")
                 .setNegativeColor(R.color.positive)
-                .setOnNegativeClicked(new CustomAlertDialogue.OnNegativeClicked() {
-                    @Override
-                    public void OnClick(View view, Dialog dialog) {
-                        dialog.dismiss();
-                    }
-                })
+                .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
                 .setDecorView(getWindow().getDecorView())
                 .build();
         alert.show();
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+    View.OnClickListener onClickListener = view -> {
 
-            Intent intent;
+        Intent intent;
 
-            switch (view.getId()) {
-                case R.id.recommend_card:
-                    intent = new Intent(MainActivity.this, RecommendTravelActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.plan_card:
-                    intent = new Intent(MainActivity.this, SelectLocActivity.class);
-                    startActivity(intent);
-                    break;
-            }
+        switch (view.getId()) {
+            case R.id.recommend_card:
+                intent = new Intent(MainActivity.this, RecommendTravelActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.plan_card:
+                intent = new Intent(MainActivity.this, SelectLocActivity.class);
+                startActivity(intent);
+                break;
         }
     };
 }

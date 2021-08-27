@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/walk_card"
+                android:id="@+id/sea_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -37,11 +37,11 @@
 
                     <!-- Media -->
                     <ImageView
+                        android:id="@+id/sea_image"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="바다 사진"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/sea" />
+                        android:scaleType="centerCrop" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -69,7 +69,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/bike_card"
+                android:id="@+id/mountain_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -87,11 +87,11 @@
 
                     <!-- Media -->
                     <ImageView
+                        android:id="@+id/mountain_image"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="산 사진"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/mountain" />
+                        android:scaleType="centerCrop" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -118,7 +118,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/public_card"
+                android:id="@+id/city_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
@@ -136,11 +136,11 @@
 
                     <!-- Media -->
                     <ImageView
+                        android:id="@+id/city_image"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="도시 사진"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/city" />
+                        android:scaleType="centerCrop" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
