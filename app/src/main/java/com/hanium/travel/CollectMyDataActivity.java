@@ -1,11 +1,10 @@
 package com.hanium.travel;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -15,8 +14,8 @@ import com.hanium.travel.fragment.MyData0Fragment;
 import com.hanium.travel.fragment.MyData1Fragment;
 import com.hanium.travel.fragment.MyData2Fragment;
 import com.hanium.travel.fragment.MyData3Fragment;
-import com.shashank.sony.fancydialoglib.Animation;
-import com.shashank.sony.fancydialoglib.FancyAlertDialog;
+
+import stream.customalert.CustomAlertDialogue;
 
 public class CollectMyDataActivity extends AppCompatActivity {
 
@@ -120,22 +119,24 @@ public class CollectMyDataActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        FancyAlertDialog.Builder
-                .with(this)
-                .setTitle("거의 다 끝났어요!")
-                .setBackgroundColor(Color.parseColor("#303F9F"))  // for @ColorRes use setBackgroundColorRes(R.color.colorvalue)
-                .setMessage("이제 거의 다 끝났어요!")
-                .setNegativeBtnText("더 볼게요")
-                .setPositiveBtnBackground(Color.parseColor("#FF4081"))  // for @ColorRes use setPositiveBtnBackgroundRes(R.color.colorvalue)
-                .setPositiveBtnText("나갈래요")
-                .setNegativeBtnBackground(Color.parseColor("#FFA9A7A8"))  // for @ColorRes use setNegativeBtnBackgroundRes(R.color.colorvalue)
-                .setAnimation(Animation.POP)
-                .isCancellable(true)
-                .setIcon(R.drawable.ic_star_border_black_24dp, View.VISIBLE)
-                .onPositiveClicked(dialog -> finish())
-                .onNegativeClicked(dialog -> Toast.makeText(CollectMyDataActivity.this, "야호!", Toast.LENGTH_SHORT).show())
-                .build()
-                .show();
+        CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(CollectMyDataActivity.this)
+                .setStyle(CustomAlertDialogue.Style.DIALOGUE)
+                .setCancelable(false)
+                .setTitle("얼마 안남았어요.")
+                .setMessage("금방 끝나요! 조금만 기다려 주시면 안될까요?")
+                .setPositiveText("나갈래요")
+                .setPositiveColor(R.color.negative)
+                .setPositiveTypeface(Typeface.DEFAULT_BOLD)
+                .setOnPositiveClicked((view, dialog) -> {
+                    dialog.dismiss();
+                    finish();
+                })
+                .setNegativeText("마저 할게요")
+                .setNegativeColor(R.color.positive)
+                .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
+                .setDecorView(getWindow().getDecorView())
+                .build();
+        alert.show();
     }
 
     public void setButton() {

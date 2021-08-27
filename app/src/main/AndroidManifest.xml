@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelHelper">
 
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
         <activity android:name=".SelectLocActivity" />
         <activity android:name=".RecommendTravelActivity" />
         <activity
@@ -30,8 +34,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true">
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
