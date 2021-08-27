@@ -45,6 +45,7 @@ public class AddUserActivity extends AppCompatActivity {
                         Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
                         Intent intent = new Intent(AddUserActivity.this, CollectMyDataActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                     return null;
                 });

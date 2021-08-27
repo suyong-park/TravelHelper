@@ -14,6 +14,7 @@ import com.hanium.travel.fragment.MyData0Fragment;
 import com.hanium.travel.fragment.MyData1Fragment;
 import com.hanium.travel.fragment.MyData2Fragment;
 import com.hanium.travel.fragment.MyData3Fragment;
+import com.hanium.travel.fragment.MyData4Fragment;
 
 import stream.customalert.CustomAlertDialogue;
 
@@ -24,6 +25,7 @@ public class CollectMyDataActivity extends AppCompatActivity {
     MyData1Fragment myData1Fragment;
     MyData2Fragment myData2Fragment;
     MyData3Fragment myData3Fragment;
+    MyData4Fragment myData4Fragment;
 
     private int pageNum = 0;
 
@@ -62,7 +64,7 @@ public class CollectMyDataActivity extends AppCompatActivity {
                 return;
             }
 
-            if(pageNum != 2)
+            if(pageNum != 3)
                 next_btn.setText("다음");
 
             System.out.println("이전 버튼 페이지 번호 : " + pageNum);
@@ -70,13 +72,37 @@ public class CollectMyDataActivity extends AppCompatActivity {
             switch (pageNum) {
                 case 0 :
                     myData1Fragment = new MyData1Fragment();
+                    fragmentTransactionBack.setCustomAnimations(
+                            R.anim.slide_in,
+                            R.anim.fade_out,
+                            R.anim.fade_in,
+                            R.anim.slide_out
+                    );
                     fragmentTransactionBack.replace(R.id.mydata_frame, myData1Fragment);
                     fragmentTransactionBack.addToBackStack(null);
                     fragmentTransactionBack.commitAllowingStateLoss();
                     break;
                 case 1 :
                     myData2Fragment = new MyData2Fragment();
+                    fragmentTransactionBack.setCustomAnimations(
+                            R.anim.slide_in,
+                            R.anim.fade_out,
+                            R.anim.fade_in,
+                            R.anim.slide_out
+                    );
                     fragmentTransactionBack.replace(R.id.mydata_frame, myData2Fragment);
+                    fragmentTransactionBack.addToBackStack(null);
+                    fragmentTransactionBack.commitAllowingStateLoss();
+                    break;
+                case 2 :
+                    myData3Fragment = new MyData3Fragment();
+                    fragmentTransactionBack.setCustomAnimations(
+                            R.anim.slide_in,
+                            R.anim.fade_out,
+                            R.anim.fade_in,
+                            R.anim.slide_out
+                    );
+                    fragmentTransactionBack.replace(R.id.mydata_frame, myData3Fragment);
                     fragmentTransactionBack.addToBackStack(null);
                     fragmentTransactionBack.commitAllowingStateLoss();
                     break;
@@ -87,12 +113,13 @@ public class CollectMyDataActivity extends AppCompatActivity {
 
             pageNum++;
 
-            if(pageNum == 2)
+            if(pageNum == 3)
                 next_btn.setText("시작");
 
-            if(pageNum > 2) {
+            if(pageNum > 3) {
                 Intent intent = new Intent(CollectMyDataActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
 
             FragmentManager fragmentManagerNext = getSupportFragmentManager();
@@ -103,13 +130,37 @@ public class CollectMyDataActivity extends AppCompatActivity {
             switch (pageNum) {
                 case 1 :
                     myData2Fragment = new MyData2Fragment();
+                    fragmentTransactionNext.setCustomAnimations(
+                            R.anim.slide_in,
+                            R.anim.fade_out,
+                            R.anim.fade_in,
+                            R.anim.slide_out
+                    );
                     fragmentTransactionNext.replace(R.id.mydata_frame, myData2Fragment);
                     fragmentTransactionNext.addToBackStack(null);
                     fragmentTransactionNext.commitAllowingStateLoss();
                     break;
                 case 2 :
                     myData3Fragment = new MyData3Fragment();
+                    fragmentTransactionNext.setCustomAnimations(
+                            R.anim.slide_in,
+                            R.anim.fade_out,
+                            R.anim.fade_in,
+                            R.anim.slide_out
+                    );
                     fragmentTransactionNext.replace(R.id.mydata_frame, myData3Fragment);
+                    fragmentTransactionNext.addToBackStack(null);
+                    fragmentTransactionNext.commitAllowingStateLoss();
+                    break;
+                case 3 :
+                    myData4Fragment = new MyData4Fragment();
+                    fragmentTransactionNext.setCustomAnimations(
+                            R.anim.slide_in,
+                            R.anim.fade_out,
+                            R.anim.fade_in,
+                            R.anim.slide_out
+                    );
+                    fragmentTransactionNext.replace(R.id.mydata_frame, myData4Fragment);
                     fragmentTransactionNext.addToBackStack(null);
                     fragmentTransactionNext.commitAllowingStateLoss();
                     break;

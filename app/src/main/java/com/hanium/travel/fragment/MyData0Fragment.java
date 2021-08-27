@@ -27,6 +27,12 @@ public class MyData0Fragment extends Fragment {
 
             MyData1Fragment myData1Fragment = new MyData1Fragment();
 
+            fragmentTransaction.setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+            );
             fragmentTransaction.replace(R.id.mydata_frame, myData1Fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commitAllowingStateLoss();

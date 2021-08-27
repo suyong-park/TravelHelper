@@ -1,6 +1,8 @@
 package com.hanium.travel;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -25,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+
         recommend_image = findViewById(R.id.recommend_image);
         plan_image = findViewById(R.id.plan_image);
 
@@ -48,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveText("종료할게요")
                 .setPositiveColor(R.color.negative)
                 .setPositiveTypeface(Typeface.DEFAULT_BOLD)
-                .setOnPositiveClicked((view, dialog) -> dialog.dismiss())
+                .setOnPositiveClicked((view, dialog) -> finish())
                 .setNegativeText("좀 더 볼게요")
                 .setNegativeColor(R.color.positive)
                 .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
