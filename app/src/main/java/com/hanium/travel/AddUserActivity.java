@@ -32,7 +32,6 @@ public class AddUserActivity extends AppCompatActivity {
                     if (error != null) {
                         Snackbar.make(view, "로그인에 실패했습니다.", Snackbar.LENGTH_LONG).show();
                     } else if (oAuthToken != null) {
-                        //Snackbar.make(view, "환영합니다.", Snackbar.LENGTH_SHORT).show();
                         Intent intent = new Intent(AddUserActivity.this, CollectMyDataActivity.class);
                         startActivity(intent);
                     }

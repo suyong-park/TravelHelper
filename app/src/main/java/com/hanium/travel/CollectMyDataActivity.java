@@ -1,43 +1,75 @@
 package com.hanium.travel;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.shashank.sony.fancydialoglib.Animation;
-import com.shashank.sony.fancydialoglib.FancyAlertDialog;
+import com.hanium.travel.fragment.MyData0Fragment;
+import com.hanium.travel.fragment.MyData2Fragment;
+import com.hanium.travel.fragment.MyData3Fragment;
 
 public class CollectMyDataActivity extends AppCompatActivity {
+
+    private Button next_btn;
+    private Button back_btn;
+
+    private int pageNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collectmydata);
 
+        next_btn = findViewById(R.id.next_btn);
+        back_btn = findViewById(R.id.back_btn);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        MyData0Fragment myData0Fragment = new MyData0Fragment();
+        fragmentTransaction.add(R.id.mydata_frame, myData0Fragment).commit();
+
+        next_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                pageNum++;
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                if(pageNum == 2)
+                    next_btn.setText("시작");
+
+                if(pageNum > 2) {
+                    Intent intent = new Intent(CollectMyDataActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+
+                switch (pageNum) {
+                    case 1 :
+                        MyData2Fragment myData2Fragment = new MyData2Fragment();
+                        fragmentTransaction.replace(R.id.mydata_frame, myData2Fragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commitAllowingStateLoss();
+                        break;
+                    case 2 :
+                        MyData3Fragment myData3Fragment = new MyData3Fragment();
+                        fragmentTransaction.replace(R.id.mydata_frame, myData3Fragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commitAllowingStateLoss();
+                        break;
+                }
+            }
+        });
     }
 
-    @Override
-    public void onBackPressed() {
-
-        FancyAlertDialog.Builder
-                .with(this)
-                .setTitle("얼마 안남았어요!")
-                .setBackgroundColor(Color.parseColor("#303F9F"))  // for @ColorRes use setBackgroundColorRes(R.color.colorvalue)
-                .setMessage("나가지 말아주세요..")
-                .setNegativeBtnText("남을게요")
-                .setPositiveBtnBackground(Color.parseColor("#FF4081"))  // for @ColorRes use setPositiveBtnBackgroundRes(R.color.colorvalue)
-                .setPositiveBtnText("나갈래요")
-                .setNegativeBtnBackground(Color.parseColor("#FFA9A7A8"))  // for @ColorRes use setNegativeBtnBackgroundRes(R.color.colorvalue)
-                .setAnimation(Animation.POP)
-                .isCancellable(false)
-                .setIcon(R.drawable.ic_baseline_sentiment_very_dissatisfied_24, View.VISIBLE)
-                .onPositiveClicked(dialog -> finish())
-                .onNegativeClicked(dialog -> Toast.makeText(CollectMyDataActivity.this, "야호!", Toast.LENGTH_SHORT).show())
-                .build()
-                .show();
+    public void setButton() {
+        next_btn.setVisibility(View.VISIBLE);
+        back_btn.setVisibility(View.VISIBLE);
     }
 }

@@ -1,4 +1,4 @@
-package com.hanium.travel;
+package com.hanium.travel.kakao;
 
 import android.app.Application;
 
