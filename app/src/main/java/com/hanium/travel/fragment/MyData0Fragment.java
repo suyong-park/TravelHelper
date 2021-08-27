@@ -16,25 +16,20 @@ import com.hanium.travel.R;
 
 public class MyData0Fragment extends Fragment {
 
-    private Button start;
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata0, container, false);
 
-        start = view.findViewById(R.id.start_btn);
+        Button start = view.findViewById(R.id.start_btn);
 
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        start.setOnClickListener(view1 -> {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                MyData1Fragment myData1Fragment = new MyData1Fragment();
+            MyData1Fragment myData1Fragment = new MyData1Fragment();
 
-                fragmentTransaction.replace(R.id.mydata_frame, myData1Fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commitAllowingStateLoss();
-            }
+            fragmentTransaction.replace(R.id.mydata_frame, myData1Fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commitAllowingStateLoss();
         });
 
         return view;
