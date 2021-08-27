@@ -14,8 +14,7 @@
         android:theme="@style/Theme.TravelHelper">
 
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:name=".MainActivity">
 
         </activity>
         <activity android:name=".SelectLocActivity" />

@@ -24,18 +24,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*
+
+        recommend_image = findViewById(R.id.recommend_image);
+        plan_image = findViewById(R.id.plan_image);
 
         recommend_card = findViewById(R.id.recommend_card);
         plan_card = findViewById(R.id.plan_card);
 
-        Glide.with(this).load(R.drawable.ic_launcher_foreground).into(recommend_image);
-        Glide.with(this).load(R.drawable.ic_launcher_foreground).into(plan_image);
+        Glide.with(this).load(R.drawable.sample).placeholder(R.drawable.noimage).into(recommend_image);
+        Glide.with(this).load(R.drawable.sample).placeholder(R.drawable.noimage).into(plan_image);
 
         recommend_card.setOnClickListener(onClickListener);
         plan_card.setOnClickListener(onClickListener);
-
-         */
     }
 
     @Override

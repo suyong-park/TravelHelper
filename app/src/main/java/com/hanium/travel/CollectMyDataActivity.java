@@ -19,8 +19,8 @@ import stream.customalert.CustomAlertDialogue;
 
 public class CollectMyDataActivity extends AppCompatActivity {
 
-    private Button next_btn;
-    private Button back_btn;
+    Button next_btn;
+    Button back_btn;
     MyData1Fragment myData1Fragment;
     MyData2Fragment myData2Fragment;
     MyData3Fragment myData3Fragment;

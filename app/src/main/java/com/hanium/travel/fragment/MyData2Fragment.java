@@ -35,9 +35,9 @@ public class MyData2Fragment extends Fragment {
         mountain_card = view.findViewById(R.id.mountain_card);
         city_card = view.findViewById(R.id.city_card);
 
-        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(sea_image);
-        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(mountain_image);
-        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(city_image);
+        Glide.with(getActivity()).load(R.drawable.sample).placeholder(R.drawable.noimage).into(sea_image);
+        Glide.with(getActivity()).load(R.drawable.sample).placeholder(R.drawable.noimage).into(mountain_image);
+        Glide.with(getActivity()).load(R.drawable.sample).placeholder(R.drawable.noimage).into(city_image);
 
         return view;
     }

@@ -43,10 +43,10 @@ public class MyData1Fragment extends Fragment {
         public_card = view.findViewById(R.id.public_card);
         walk_card = view.findViewById(R.id.walk_card);
 
-        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(car_image);
-        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(public_image);
-        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(bike_image);
-        Glide.with(getActivity()).load(R.drawable.ic_launcher_foreground).into(walk_image);
+        Glide.with(getActivity()).load(R.drawable.sample).placeholder(R.drawable.noimage).into(car_image);
+        Glide.with(getActivity()).load(R.drawable.sample).placeholder(R.drawable.noimage).into(public_image);
+        Glide.with(getActivity()).load(R.drawable.sample).placeholder(R.drawable.noimage).into(bike_image);
+        Glide.with(getActivity()).load(R.drawable.sample).placeholder(R.drawable.noimage).into(walk_image);
 
         car_card.setOnClickListener(onClickListener);
         bike_card.setOnClickListener(onClickListener);
