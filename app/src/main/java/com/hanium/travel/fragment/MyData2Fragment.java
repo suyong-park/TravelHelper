@@ -16,13 +16,13 @@ import com.hanium.travel.R;
 
 public class MyData2Fragment extends Fragment {
 
-    ImageView sea_image;
-    ImageView mountain_image;
-    ImageView city_image;
+    private ImageView sea_image;
+    private ImageView mountain_image;
+    private ImageView city_image;
 
-    MaterialCardView sea_card;
-    MaterialCardView mountain_card;
-    MaterialCardView city_card;
+    private MaterialCardView sea_card;
+    private MaterialCardView mountain_card;
+    private MaterialCardView city_card;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata2, container, false);

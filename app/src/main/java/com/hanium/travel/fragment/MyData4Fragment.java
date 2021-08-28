@@ -16,15 +16,15 @@ import com.hanium.travel.R;
 
 public class MyData4Fragment extends Fragment {
 
-    ImageView lover_image;
-    ImageView friend_image;
-    ImageView family_image;
-    ImageView solo_image;
+    private ImageView lover_image;
+    private ImageView friend_image;
+    private ImageView family_image;
+    private ImageView solo_image;
 
-    MaterialCardView lover_card;
-    MaterialCardView friend_card;
-    MaterialCardView family_card;
-    MaterialCardView solo_card;
+    private MaterialCardView lover_card;
+    private MaterialCardView friend_card;
+    private MaterialCardView family_card;
+    private MaterialCardView solo_card;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata4, container, false);

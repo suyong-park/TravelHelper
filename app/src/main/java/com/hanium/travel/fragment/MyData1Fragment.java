@@ -17,20 +17,20 @@ import com.hanium.travel.R;
 
 public class MyData1Fragment extends Fragment {
 
-    ImageView car_image;
-    ImageView public_image;
-    ImageView bike_image;
-    ImageView walk_image;
+    private ImageView car_image;
+    private ImageView public_image;
+    private ImageView bike_image;
+    private ImageView walk_image;
 
-    MaterialCardView car_card;
-    MaterialCardView public_card;
-    MaterialCardView bike_card;
-    MaterialCardView walk_card;
+    private MaterialCardView car_card;
+    private MaterialCardView public_card;
+    private MaterialCardView bike_card;
+    private MaterialCardView walk_card;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata1, container, false);
 
-        ((CollectMyDataActivity) getActivity()).setButton();
+        ((CollectMyDataActivity) getActivity()).setVisibility();
 
         car_image = view.findViewById(R.id.car_image);
         public_image = view.findViewById(R.id.public_image);

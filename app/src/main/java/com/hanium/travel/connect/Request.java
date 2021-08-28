@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Request {
 
-    static Retrofit getRetrofit() {
+    public static Retrofit getRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl(ConnectServer.IP_ADDRESS)
                 .addConverterFactory(GsonConverterFactory.create())

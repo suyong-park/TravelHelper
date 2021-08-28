@@ -1,10 +1,10 @@
 package com.hanium.travel.activity;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -18,19 +18,21 @@ import com.hanium.travel.fragment.MyData3Fragment;
 import com.hanium.travel.fragment.MyData4Fragment;
 import com.hanium.travel.fragment.MyData5Fragment;
 import com.hanium.travel.fragment.MyData6Fragment;
-
-import stream.customalert.CustomAlertDialogue;
+import com.hanium.travel.project.SingleTon;
 
 public class CollectMyDataActivity extends AppCompatActivity {
 
-    Button next_btn;
-    Button back_btn;
-    MyData1Fragment myData1Fragment;
-    MyData2Fragment myData2Fragment;
-    MyData3Fragment myData3Fragment;
-    MyData4Fragment myData4Fragment;
-    MyData5Fragment myData5Fragment;
-    MyData6Fragment myData6Fragment;
+    private TextView textPageNum;
+    TextView sub1;
+    TextView sub2;
+    private Button next_btn;
+    private Button back_btn;
+    private MyData1Fragment myData1Fragment;
+    private MyData2Fragment myData2Fragment;
+    private MyData3Fragment myData3Fragment;
+    private MyData4Fragment myData4Fragment;
+    private MyData5Fragment myData5Fragment;
+    private MyData6Fragment myData6Fragment;
 
     private int pageNum = 0;
 
@@ -41,10 +43,14 @@ public class CollectMyDataActivity extends AppCompatActivity {
 
         next_btn = findViewById(R.id.next_btn);
         back_btn = findViewById(R.id.back_btn);
+        textPageNum = findViewById(R.id.page_num);
+        sub1 = findViewById(R.id.sub1);
+        sub2 = findViewById(R.id.sub2);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+        textPageNum.setText("1");
         MyData0Fragment myData0Fragment = new MyData0Fragment();
         fragmentTransaction.add(R.id.mydata_frame, myData0Fragment).commit();
 
@@ -65,23 +71,24 @@ public class CollectMyDataActivity extends AppCompatActivity {
 
                 next_btn.setVisibility(View.GONE);
                 back_btn.setVisibility(View.GONE);
-
+                textPageNum.setVisibility(View.GONE);
+                sub1.setVisibility(View.GONE);
+                sub2.setVisibility(View.GONE);
                 return;
             }
 
+            textPageNum.setText(String.valueOf(pageNum + 1));
             if(pageNum != 5)
                 next_btn.setText("다음");
-
-            System.out.println("이전 버튼 페이지 번호 : " + pageNum);
 
             switch (pageNum) {
                 case 0 :
                     myData1Fragment = new MyData1Fragment();
                     fragmentTransactionBack.setCustomAnimations(
-                            R.anim.slide_in,
-                            R.anim.fade_out,
                             R.anim.fade_in,
-                            R.anim.slide_out
+                            R.anim.slide_out,
+                            R.anim.slide_in,
+                            R.anim.fade_out
                     );
                     fragmentTransactionBack.replace(R.id.mydata_frame, myData1Fragment);
                     fragmentTransactionBack.addToBackStack(null);
@@ -90,10 +97,10 @@ public class CollectMyDataActivity extends AppCompatActivity {
                 case 1 :
                     myData2Fragment = new MyData2Fragment();
                     fragmentTransactionBack.setCustomAnimations(
-                            R.anim.slide_in,
-                            R.anim.fade_out,
                             R.anim.fade_in,
-                            R.anim.slide_out
+                            R.anim.slide_out,
+                            R.anim.slide_in,
+                            R.anim.fade_out
                     );
                     fragmentTransactionBack.replace(R.id.mydata_frame, myData2Fragment);
                     fragmentTransactionBack.addToBackStack(null);
@@ -102,10 +109,10 @@ public class CollectMyDataActivity extends AppCompatActivity {
                 case 2 :
                     myData3Fragment = new MyData3Fragment();
                     fragmentTransactionBack.setCustomAnimations(
-                            R.anim.slide_in,
-                            R.anim.fade_out,
                             R.anim.fade_in,
-                            R.anim.slide_out
+                            R.anim.slide_out,
+                            R.anim.slide_in,
+                            R.anim.fade_out
                     );
                     fragmentTransactionBack.replace(R.id.mydata_frame, myData3Fragment);
                     fragmentTransactionBack.addToBackStack(null);
@@ -114,10 +121,10 @@ public class CollectMyDataActivity extends AppCompatActivity {
                 case 3 :
                     myData4Fragment = new MyData4Fragment();
                     fragmentTransactionBack.setCustomAnimations(
-                            R.anim.slide_in,
-                            R.anim.fade_out,
                             R.anim.fade_in,
-                            R.anim.slide_out
+                            R.anim.slide_out,
+                            R.anim.slide_in,
+                            R.anim.fade_out
                     );
                     fragmentTransactionBack.replace(R.id.mydata_frame, myData4Fragment);
                     fragmentTransactionBack.addToBackStack(null);
@@ -126,10 +133,10 @@ public class CollectMyDataActivity extends AppCompatActivity {
                 case 4 :
                     myData5Fragment = new MyData5Fragment();
                     fragmentTransactionBack.setCustomAnimations(
-                            R.anim.slide_in,
-                            R.anim.fade_out,
                             R.anim.fade_in,
-                            R.anim.slide_out
+                            R.anim.slide_out,
+                            R.anim.slide_in,
+                            R.anim.fade_out
                     );
                     fragmentTransactionBack.replace(R.id.mydata_frame, myData5Fragment);
                     fragmentTransactionBack.addToBackStack(null);
@@ -141,6 +148,11 @@ public class CollectMyDataActivity extends AppCompatActivity {
         next_btn.setOnClickListener(view -> {
 
             pageNum++;
+            System.out.println("다음 버튼 페이지 번호 : " + pageNum);
+            if(pageNum + 1 == 7)
+                textPageNum.setText("6");
+            else
+                textPageNum.setText(String.valueOf(pageNum + 1));
 
             if(pageNum == 5)
                 next_btn.setText("시작");
@@ -153,8 +165,6 @@ public class CollectMyDataActivity extends AppCompatActivity {
 
             FragmentManager fragmentManagerNext = getSupportFragmentManager();
             FragmentTransaction fragmentTransactionNext = fragmentManagerNext.beginTransaction();
-
-            System.out.println("다음 버튼 페이지 번호 : " + pageNum);
 
             switch (pageNum) {
                 case 1 :
@@ -223,28 +233,22 @@ public class CollectMyDataActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(CollectMyDataActivity.this)
-                .setStyle(CustomAlertDialogue.Style.DIALOGUE)
-                .setCancelable(false)
-                .setTitle("얼마 안남았어요.")
-                .setMessage("금방 끝나요! 조금만 기다려 주시면 안될까요?")
-                .setPositiveText("나갈래요")
-                .setPositiveColor(R.color.negative)
-                .setPositiveTypeface(Typeface.DEFAULT_BOLD)
+        SingleTon.alertDialogTwoButton(CollectMyDataActivity.this, "얼마 안남았어요.", "금방 끝나요! 조금만 기다려 주시면 안될까요?",
+                "나갈래요", "마저 할게요")
                 .setOnPositiveClicked((view, dialog) -> {
                     dialog.dismiss();
                     finish();
                 })
-                .setNegativeText("마저 할게요")
-                .setNegativeColor(R.color.positive)
                 .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
                 .setDecorView(getWindow().getDecorView())
-                .build();
-        alert.show();
+                .build().show();
     }
 
-    public void setButton() {
+    public void setVisibility() {
         next_btn.setVisibility(View.VISIBLE);
         back_btn.setVisibility(View.VISIBLE);
+        textPageNum.setVisibility(View.VISIBLE);
+        sub1.setVisibility(View.VISIBLE);
+        sub2.setVisibility(View.VISIBLE);
     }
 }

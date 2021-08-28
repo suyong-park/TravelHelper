@@ -16,15 +16,15 @@ import com.hanium.travel.R;
 
 public class MyData3Fragment extends Fragment {
 
-    ImageView food_image;
-    ImageView picture_image;
-    ImageView tour_image;
-    ImageView healing_image;
+    private ImageView food_image;
+    private ImageView picture_image;
+    private ImageView tour_image;
+    private ImageView healing_image;
 
-    MaterialCardView food_card;
-    MaterialCardView picture_card;
-    MaterialCardView tour_card;
-    MaterialCardView healing_card;
+    private MaterialCardView food_card;
+    private MaterialCardView picture_card;
+    private MaterialCardView tour_card;
+    private MaterialCardView healing_card;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata3, container, false);

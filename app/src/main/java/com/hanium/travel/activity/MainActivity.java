@@ -8,7 +8,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -20,19 +19,18 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import com.hanium.travel.R;
-
-import stream.customalert.CustomAlertDialogue;
+import com.hanium.travel.project.SingleTon;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView recommend_image;
-    ImageView plan_image;
-    MaterialCardView recommend_card;
-    MaterialCardView plan_card;
-    DrawerLayout drawer;
-    ActionBarDrawerToggle toggle;
+    private ImageView recommend_image;
+    private ImageView plan_image;
+    private MaterialCardView recommend_card;
+    private MaterialCardView plan_card;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
 
-    boolean isDrawerOpen;
+    private boolean isDrawerOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false); // 기존 title 지우기
-        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 만들기
+        actionBar.setDisplayShowTitleEnabled(false); // 기존 title 제거
+        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼
 
         recommend_image = findViewById(R.id.recommend_image);
         plan_image = findViewById(R.id.plan_image);
@@ -66,13 +64,21 @@ public class MainActivity extends AppCompatActivity {
 
             int id = item.getItemId();
 
-            if(id == R.id.nav_modify_mydata){
-                Toast.makeText(MainActivity.this, "여행 취향 수정하기", Toast.LENGTH_SHORT).show();
-            }
-            else if(id == R.id.nav_QR){
+            if(id == R.id.nav_modify_mydata) // navigation drawer : 여행 취향 수정하기
+                SingleTon.alertDialogTwoButton(MainActivity.this, "여행 취향 수정하기", "여행 취향을 다시 설정하시겠어요?",
+                        "수정할게요", "괜찮아요")
+                        .setOnPositiveClicked((view, dialog) -> {
+                            Intent intent = new Intent(MainActivity.this, CollectMyDataActivity.class);
+                            startActivity(intent);
+                            finish();
+                        })
+                        .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
+                        .setDecorView(getWindow().getDecorView())
+                        .build().show();
+            else if(id == R.id.nav_QR) { // navigation drawer : QR 체크인
                 Toast.makeText(MainActivity.this, "QR 체크인", Toast.LENGTH_SHORT).show();
             }
-            else if(id == R.id.nav_destination_visited){
+            else if(id == R.id.nav_destination_visited) { // navigation drawer : 방문했던 여행지
                 Toast.makeText(MainActivity.this, "방문했던 여행지", Toast.LENGTH_SHORT).show();
             }
 
@@ -103,23 +109,13 @@ public class MainActivity extends AppCompatActivity {
 
         if(isDrawerOpen)
             drawer.closeDrawer(Gravity.LEFT);
-        else {
-            CustomAlertDialogue.Builder alert = new CustomAlertDialogue.Builder(MainActivity.this)
-                    .setStyle(CustomAlertDialogue.Style.DIALOGUE)
-                    .setCancelable(false)
-                    .setTitle("나가기")
-                    .setMessage("정말 앱을 종료하시겠어요?")
-                    .setPositiveText("종료할게요")
-                    .setPositiveColor(R.color.negative)
-                    .setPositiveTypeface(Typeface.DEFAULT_BOLD)
-                    .setOnPositiveClicked((view, dialog) -> finish())
-                    .setNegativeText("좀 더 볼게요")
-                    .setNegativeColor(R.color.positive)
-                    .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
-                    .setDecorView(getWindow().getDecorView())
-                    .build();
-            alert.show();
-        }
+        else
+            SingleTon.alertDialogTwoButton(MainActivity.this, "나가기", "정말 앱을 종료하시겠어요?",
+                    "종료할게요", "좀 더 볼게요")
+            .setOnPositiveClicked((view, dialog) -> finish())
+            .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
+            .setDecorView(getWindow().getDecorView())
+            .build().show();
     }
 
     View.OnClickListener onClickListener = view -> {
@@ -142,11 +138,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         toggle.onOptionsItemSelected(item);
-        switch (item.getItemId()){
-            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
-                drawer.openDrawer(GravityCompat.START);
-                return true;
-            }
+        if (item.getItemId() == android.R.id.home) {
+            drawer.openDrawer(GravityCompat.START);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.hanium.travel.R;
 import com.kakao.sdk.user.UserApiClient;
@@ -25,8 +24,8 @@ public class AddUserActivity extends AppCompatActivity {
 
     private static final String TAG = "사용자";
 
-    TextView textView;
-    ImageButton imageButton;
+    private TextView textView;
+    private ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
