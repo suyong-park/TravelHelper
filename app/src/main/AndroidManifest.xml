@@ -13,17 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelHelper" >
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:theme="@style/Theme.TravelHelper.NoActionBar" >
         </activity>
-        <activity android:name=".SelectLocActivity" />
-        <activity android:name=".RecommendTravelActivity" />
+        <activity android:name=".activity.SelectLocActivity" />
+        <activity android:name=".activity.RecommendTravelActivity" />
         <activity
-            android:name=".CollectMyDataActivity"
+            android:name=".activity.CollectMyDataActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" >
         </activity>
         <activity
-            android:name=".AddUserActivity"
+            android:name=".activity.AddUserActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

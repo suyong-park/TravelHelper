@@ -1,4 +1,4 @@
-package com.hanium.travel;
+package com.hanium.travel.activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
+import com.hanium.travel.R;
 
 import stream.customalert.CustomAlertDialogue;
 
@@ -66,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
 
             int id = item.getItemId();
 
-            if(id == R.id.nav_home){
-                Toast.makeText(MainActivity.this, "home", Toast.LENGTH_SHORT).show();
+            if(id == R.id.nav_modify_mydata){
+                Toast.makeText(MainActivity.this, "여행 취향 수정하기", Toast.LENGTH_SHORT).show();
             }
-            else if(id == R.id.nav_gallery){
-                Toast.makeText(MainActivity.this, "gallery", Toast.LENGTH_SHORT).show();
+            else if(id == R.id.nav_QR){
+                Toast.makeText(MainActivity.this, "QR 체크인", Toast.LENGTH_SHORT).show();
             }
-            else if(id == R.id.nav_slideshow){
-                Toast.makeText(MainActivity.this, "slideshow", Toast.LENGTH_SHORT).show();
+            else if(id == R.id.nav_destination_visited){
+                Toast.makeText(MainActivity.this, "방문했던 여행지", Toast.LENGTH_SHORT).show();
             }
 
             return true;
@@ -149,12 +149,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
     }
 }

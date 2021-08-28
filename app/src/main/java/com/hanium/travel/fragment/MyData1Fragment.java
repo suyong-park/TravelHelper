@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
-import com.hanium.travel.CollectMyDataActivity;
+import com.hanium.travel.activity.CollectMyDataActivity;
 import com.hanium.travel.R;
 
 public class MyData1Fragment extends Fragment {
