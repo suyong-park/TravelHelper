@@ -16,10 +16,6 @@ import com.hanium.travel.R;
 
 public class MyData2Fragment extends Fragment {
 
-    private ImageView sea_image;
-    private ImageView mountain_image;
-    private ImageView city_image;
-
     private MaterialCardView sea_card;
     private MaterialCardView mountain_card;
     private MaterialCardView city_card;
@@ -27,9 +23,9 @@ public class MyData2Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata2, container, false);
 
-        sea_image = view.findViewById(R.id.sea_image);
-        mountain_image = view.findViewById(R.id.mountain_image);
-        city_image = view.findViewById(R.id.city_image);
+        ImageView sea_image = view.findViewById(R.id.sea_image);
+        ImageView mountain_image = view.findViewById(R.id.mountain_image);
+        ImageView city_image = view.findViewById(R.id.city_image);
 
         sea_card = view.findViewById(R.id.sea_card);
         mountain_card = view.findViewById(R.id.mountain_card);

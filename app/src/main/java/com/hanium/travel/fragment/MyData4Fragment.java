@@ -16,11 +16,6 @@ import com.hanium.travel.R;
 
 public class MyData4Fragment extends Fragment {
 
-    private ImageView lover_image;
-    private ImageView friend_image;
-    private ImageView family_image;
-    private ImageView solo_image;
-
     private MaterialCardView lover_card;
     private MaterialCardView friend_card;
     private MaterialCardView family_card;
@@ -29,10 +24,10 @@ public class MyData4Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata4, container, false);
 
-        lover_image = view.findViewById(R.id.lover_image);
-        friend_image = view.findViewById(R.id.friend_image);
-        family_image = view.findViewById(R.id.family_image);
-        solo_image = view.findViewById(R.id.solo_image);
+        ImageView lover_image = view.findViewById(R.id.lover_image);
+        ImageView friend_image = view.findViewById(R.id.friend_image);
+        ImageView family_image = view.findViewById(R.id.family_image);
+        ImageView solo_image = view.findViewById(R.id.solo_image);
 
         lover_card = view.findViewById(R.id.lover_card);
         friend_card = view.findViewById(R.id.friend_card);

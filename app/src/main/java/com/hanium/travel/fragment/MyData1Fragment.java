@@ -17,11 +17,6 @@ import com.hanium.travel.R;
 
 public class MyData1Fragment extends Fragment {
 
-    private ImageView car_image;
-    private ImageView public_image;
-    private ImageView bike_image;
-    private ImageView walk_image;
-
     private MaterialCardView car_card;
     private MaterialCardView public_card;
     private MaterialCardView bike_card;
@@ -32,10 +27,10 @@ public class MyData1Fragment extends Fragment {
 
         ((CollectMyDataActivity) getActivity()).setVisibility();
 
-        car_image = view.findViewById(R.id.car_image);
-        public_image = view.findViewById(R.id.public_image);
-        bike_image = view.findViewById(R.id.bike_image);
-        walk_image = view.findViewById(R.id.walk_image);
+        ImageView car_image = view.findViewById(R.id.car_image);
+        ImageView public_image = view.findViewById(R.id.public_image);
+        ImageView bike_image = view.findViewById(R.id.bike_image);
+        ImageView walk_image = view.findViewById(R.id.walk_image);
 
         car_card = view.findViewById(R.id.car_card);
         bike_card = view.findViewById(R.id.bike_card);
