@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hanium.travel">
+    package="com.hanium.travel" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,40 +11,39 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TravelHelper">
-
+        android:theme="@style/Theme.TravelHelper" >
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar">
+            android:theme="@style/Theme.TravelHelper.NoActionBar" >
         </activity>
         <activity android:name=".SelectLocActivity" />
         <activity android:name=".RecommendTravelActivity" />
         <activity
             android:name=".CollectMyDataActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar">
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" >
         </activity>
-
         <activity
             android:name=".AddUserActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true" >
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <!--Redirect URI: "kakao{NATIVE_APP_KEY}://oauth"-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
                 <data
                     android:host="oauth"
-                    android:scheme="kakaoa90194c426e58d7d1d0b86c1a662743a"/>
+                    android:scheme="kakaoa90194c426e58d7d1d0b86c1a662743a" />
             </intent-filter>
         </activity>
     </application>

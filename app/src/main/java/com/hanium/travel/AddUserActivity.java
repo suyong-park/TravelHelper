@@ -37,36 +37,37 @@ public class AddUserActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserApiClient.getInstance().loginWithKakaoTalk(AddUserActivity.this,(oAuthToken, error) -> {
-                    if (error != null) {
-                        Log.e(TAG, "로그인 실패", error);
-                        Snackbar.make(view, "로그인에 실패했습니다.", Snackbar.LENGTH_LONG).show();
-                    } else if (oAuthToken != null) {
-                        Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
-                        Intent intent = new Intent(AddUserActivity.this, CollectMyDataActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    return null;
-                });
+                Intent intent = new Intent(AddUserActivity.this, CollectMyDataActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UserApiClient.getInstance().logout(error -> {
-                    if (error != null) {
-                        Log.e(TAG, "로그아웃 실패, SDK에서 토큰 삭제됨", error);
-                        Snackbar.make(view, "로그아웃에 실패했습니다.", Snackbar.LENGTH_LONG).show();
-                    }else{
-                        Log.e(TAG, "로그아웃 성공, SDK에서 토큰 삭제됨");
-                        Snackbar.make(view, "로그아웃에 성공했습니다.", Snackbar.LENGTH_LONG).show();
-                    }
-                    return null;
-                });
+        /*
+        imageButton.setOnClickListener(view -> UserApiClient.getInstance().loginWithKakaoTalk(AddUserActivity.this,(oAuthToken, error) -> {
+            if (error != null) {
+                Log.e(TAG, "로그인 실패", error);
+                Snackbar.make(view, "로그인에 실패했습니다.", Snackbar.LENGTH_LONG).show();
+            } else if (oAuthToken != null) {
+                Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
+                Intent intent = new Intent(AddUserActivity.this, CollectMyDataActivity.class);
+                startActivity(intent);
+                finish();
             }
-        });
+            return null;
+        }));
+         */
+
+        textView.setOnClickListener(view -> UserApiClient.getInstance().logout(error -> {
+            if (error != null) {
+                Log.e(TAG, "로그아웃 실패, SDK에서 토큰 삭제됨", error);
+                Snackbar.make(view, "로그아웃에 실패했습니다.", Snackbar.LENGTH_LONG).show();
+            }else{
+                Log.e(TAG, "로그아웃 성공, SDK에서 토큰 삭제됨");
+                Snackbar.make(view, "로그아웃에 성공했습니다.", Snackbar.LENGTH_LONG).show();
+            }
+            return null;
+        }));
     }
 
     public String getKeyHash(){
