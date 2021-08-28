@@ -1,8 +1,12 @@
 package com.hanium.travel.project;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.hanium.travel.R;
 
 import stream.customalert.CustomAlertDialogue;
@@ -29,5 +33,12 @@ public class SingleTon {
         .build
         .show
          */
+    }
+
+    public static void hideKeyboard(Activity activity) { // Fragment 키보드 내리기
+        if (activity != null && activity.getCurrentFocus() != null) {
+            InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }

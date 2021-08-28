@@ -1,5 +1,6 @@
 package com.hanium.travel.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -23,8 +25,8 @@ import com.hanium.travel.project.SingleTon;
 public class CollectMyDataActivity extends AppCompatActivity {
 
     private TextView textPageNum;
-    TextView sub1;
-    TextView sub2;
+    private TextView sub1;
+    private TextView sub2;
     private Button next_btn;
     private Button back_btn;
     private MyData1Fragment myData1Fragment;
@@ -36,6 +38,7 @@ public class CollectMyDataActivity extends AppCompatActivity {
 
     private int pageNum = 0;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,12 @@ public class CollectMyDataActivity extends AppCompatActivity {
         textPageNum = findViewById(R.id.page_num);
         sub1 = findViewById(R.id.sub1);
         sub2 = findViewById(R.id.sub2);
+
+        ConstraintLayout layout = findViewById(R.id.parent_view_mydata);
+        layout.setOnTouchListener((view, motionEvent) -> {
+            SingleTon.hideKeyboard(CollectMyDataActivity.this);
+            return false;
+        });
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

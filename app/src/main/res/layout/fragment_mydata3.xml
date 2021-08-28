@@ -18,6 +18,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="여행의 주목적은 무엇인가요?"
+                android:textSize="25sp" />
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/food_card"
                 android:layout_width="match_parent"
@@ -25,7 +33,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:layout_weight="1"
                 android:checkable="true"
                 android:clickable="true"
