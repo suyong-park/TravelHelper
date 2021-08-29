@@ -20,10 +20,12 @@
         <activity android:name=".activity.RecommendTravelActivity" />
         <activity
             android:name=".activity.CollectMyDataActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" >
         </activity>
         <activity
             android:name=".activity.AddUserActivity"
+            android:screenOrientation="portrait"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.hanium.travel.R;
-import com.hanium.travel.ValidationCard;
+import com.hanium.travel.validclass.ValidationCard;
 import com.hanium.travel.project.SingleTon;
 
 public class MyData3Fragment extends Fragment implements ValidationCard {
@@ -24,8 +24,6 @@ public class MyData3Fragment extends Fragment implements ValidationCard {
     private MaterialCardView picture_card;
     private MaterialCardView tour_card;
     private MaterialCardView healing_card;
-
-    private boolean isValid = false;
 
     public static MyData3Fragment newInstance() {
         MyData3Fragment myData3Fragment = new MyData3Fragment();
@@ -57,10 +55,11 @@ public class MyData3Fragment extends Fragment implements ValidationCard {
 
         View nextBtnView = requireActivity().findViewById(R.id.next_btn);
         nextBtnView.setOnClickListener(btnView -> {
-            isValid = isSelectCard(food_card, picture_card, tour_card, healing_card);
+
+            boolean isValid = isSelectCard(food_card, picture_card, tour_card, healing_card);
 
             if(!isValid) {
-                setDialog();
+                setDialog(requireActivity(), "선택해 주세요!", "취향에 맞는 여행지 추천을 위해 최소 한 개 이상 선택해 주세요.");
                 return;
             }
 
@@ -102,14 +101,6 @@ public class MyData3Fragment extends Fragment implements ValidationCard {
             }
         }
     };
-
-    @Override
-    public void setDialog() {
-        SingleTon.alertDialogNoButton(requireActivity(), "선택해 주세요!", "취향에 맞는 여행지 추천을 위해 최소 한 개 이상 선택해 주세요.")
-                .setDecorView(requireActivity().getWindow().getDecorView())
-                .build()
-                .show();
-    }
 
     @Override
     public boolean isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3) {

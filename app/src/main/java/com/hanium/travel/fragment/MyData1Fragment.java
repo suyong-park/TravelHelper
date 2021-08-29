@@ -1,6 +1,5 @@
 package com.hanium.travel.fragment;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +14,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
-import com.hanium.travel.ValidationCard;
+import com.hanium.travel.validclass.ValidationCard;
 import com.hanium.travel.activity.CollectMyDataActivity;
 import com.hanium.travel.R;
 import com.hanium.travel.project.SingleTon;
-
-import stream.customalert.CustomAlertDialogue;
 
 public class MyData1Fragment extends Fragment implements ValidationCard {
 
@@ -28,8 +25,6 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
     private MaterialCardView public_card;
     private MaterialCardView bike_card;
     private MaterialCardView walk_card;
-
-    private boolean isValid = false;
 
     public static MyData1Fragment newInstance() {
         MyData1Fragment myData1Fragment = new MyData1Fragment();
@@ -64,10 +59,11 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
 
         View nextBtnView = requireActivity().findViewById(R.id.next_btn);
         nextBtnView.setOnClickListener(btnView -> {
-            isValid = isSelectCard(car_card, bike_card, public_card, walk_card);
+
+            boolean isValid = isSelectCard(car_card, bike_card, public_card, walk_card);
 
             if(!isValid) {
-                setDialog();
+                setDialog(requireActivity(), "선택해 주세요!", "취향에 맞는 여행지 추천을 위해 최소 한 개 이상 선택해 주세요.");
                 return;
             }
 
@@ -109,14 +105,6 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
             }
         }
     };
-
-    @Override
-    public void setDialog() {
-        SingleTon.alertDialogNoButton(requireActivity(), "선택해 주세요!", "취향에 맞는 여행지 추천을 위해 최소 한 개 이상 선택해 주세요.")
-                .setDecorView(requireActivity().getWindow().getDecorView())
-                .build()
-                .show();
-    }
 
     @Override
     public boolean isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3) {

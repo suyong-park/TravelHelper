@@ -13,15 +13,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.hanium.travel.R;
-import com.hanium.travel.ValidationEdit;
-import com.hanium.travel.project.SingleTon;
+import com.hanium.travel.validclass.ValidationEdit;
 
 public class MyData5Fragment extends Fragment implements ValidationEdit {
 
     private TextInputEditText minMoney;
     private TextInputEditText maxMoney;
-
-    private boolean isValid = false;
 
     public static MyData5Fragment newInstance() {
         MyData5Fragment myData5Fragment = new MyData5Fragment();
@@ -36,10 +33,16 @@ public class MyData5Fragment extends Fragment implements ValidationEdit {
 
         View nextBtnView = requireActivity().findViewById(R.id.next_btn);
         nextBtnView.setOnClickListener(btnView -> {
-            isValid = isEnterAllValue(minMoney, maxMoney);
 
+            boolean isValid = isEnterAllValue(minMoney, maxMoney);
             if(!isValid) {
-                setDialog();
+                setDialog(requireActivity(), "입력해 주세요!", "취향에 맞는 여행지 추천을 위해 모든 사항을 입력해 주세요.");
+                return;
+            }
+
+            isValid = isDataValid(minMoney, maxMoney);
+            if(!isValid) {
+                setDialog(requireActivity(), "OOPS !", "최대 금액에는 최소 금액보다 큰 금액을 기재해 주셔야 해요!");
                 return;
             }
 
@@ -63,14 +66,6 @@ public class MyData5Fragment extends Fragment implements ValidationEdit {
     }
 
     @Override
-    public void setDialog() {
-        SingleTon.alertDialogNoButton(requireActivity(), "입력해 주세요!", "취향에 맞는 여행지 추천을 위해 모든 사항을 입력해 주세요.")
-                .setDecorView(requireActivity().getWindow().getDecorView())
-                .build()
-                .show();
-    }
-
-    @Override
     public boolean isEnterAllValue(TextInputEditText editText1, TextInputEditText editText2) {
         return !editText1.getText().toString().trim().isEmpty() && !editText2.getText().toString().trim().isEmpty();
     }
@@ -78,5 +73,18 @@ public class MyData5Fragment extends Fragment implements ValidationEdit {
     @Override
     public boolean isEnterAllValue(TextInputEditText editText1, TextInputEditText editText2, TextInputEditText editText3) {
         return false;
+    }
+
+    @Override
+    public boolean isDataValid(TextInputEditText editText1, TextInputEditText editText2) {
+        int minMoney = Integer.parseInt(editText1.getText().toString().trim());
+        int maxMoney = Integer.parseInt(editText2.getText().toString().trim());
+
+        return minMoney < maxMoney;
+    }
+
+    @Override
+    public int isDataValid(TextInputEditText editText1, TextInputEditText editText2, TextInputEditText editText3) {
+        return 0;
     }
 }
