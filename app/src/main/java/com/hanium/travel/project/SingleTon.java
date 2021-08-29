@@ -35,6 +35,26 @@ public class SingleTon {
          */
     }
 
+    public static CustomAlertDialogue.Builder alertDialogOneButton(Activity activity, String title, String message, String buttonText) {
+        return new CustomAlertDialogue.Builder(activity)
+                .setStyle(CustomAlertDialogue.Style.DIALOGUE)
+                .setTitle(title)
+                .setMessage(message)
+                .setNegativeText(buttonText)
+                .setNegativeColor(R.color.negative)
+                .setNegativeTypeface(Typeface.DEFAULT_BOLD)
+                .build();
+        /* 개발자 구현
+        .setOnNegativeClicked(new CustomAlertDialogue.OnNegativeClicked() {
+                    @Override
+                    public void OnClick(View view, Dialog dialog) {
+
+                    }
+                })
+        .setDecorView(getWindow().getDecorView())
+         */
+    }
+
     public static void hideKeyboard(Activity activity) { // Fragment 키보드 내리기
         if (activity != null && activity.getCurrentFocus() != null) {
             InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);

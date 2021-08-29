@@ -1,5 +1,6 @@
 package com.hanium.travel.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,9 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.hanium.travel.activity.CollectMyDataActivity;
 import com.hanium.travel.R;
+import com.hanium.travel.project.SingleTon;
+
+import stream.customalert.CustomAlertDialogue;
 
 public class MyData1Fragment extends Fragment {
 
@@ -21,6 +25,8 @@ public class MyData1Fragment extends Fragment {
     private MaterialCardView public_card;
     private MaterialCardView bike_card;
     private MaterialCardView walk_card;
+
+    private int count = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata1, container, false);
@@ -69,4 +75,18 @@ public class MyData1Fragment extends Fragment {
             }
         }
     };
+
+    public void isValid() {
+        isSelectCard(car_card, bike_card, public_card, walk_card);
+    }
+
+    public void isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3, MaterialCardView cardView4) {
+        if(!cardView1.isChecked() && !cardView2.isChecked() && !cardView3.isChecked() && !cardView4.isChecked())
+            SingleTon.alertDialogOneButton(requireActivity(), "선택!", "조금이라도 더 취향에 맞을 수 있는 여행지 추천을 위해 최소 한 개 이상 선택해 주세요.",
+                    "확인")
+                    .setOnNegativeClicked(null)
+                    .setDecorView(requireActivity().getWindow().getDecorView())
+                    .build()
+                    .show();
+    }
 }
