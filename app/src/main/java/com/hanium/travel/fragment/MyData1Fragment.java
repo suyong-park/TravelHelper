@@ -1,5 +1,6 @@
 package com.hanium.travel.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
+import com.hanium.travel.activity.MainActivity;
 import com.hanium.travel.validclass.ValidationCard;
 import com.hanium.travel.activity.CollectMyDataActivity;
 import com.hanium.travel.R;
@@ -25,6 +27,8 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
     private MaterialCardView public_card;
     private MaterialCardView bike_card;
     private MaterialCardView walk_card;
+
+    private boolean[] isCheckedArray;
 
     public static MyData1Fragment newInstance() {
         MyData1Fragment myData1Fragment = new MyData1Fragment();
@@ -60,7 +64,7 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
         View nextBtnView = requireActivity().findViewById(R.id.next_btn);
         nextBtnView.setOnClickListener(btnView -> {
 
-            boolean isValid = isSelectCard(car_card, bike_card, public_card, walk_card);
+            boolean isValid = isSelectCard(walk_card, bike_card, public_card, car_card);
 
             if(!isValid) {
                 setDialog(requireActivity(), "선택해 주세요!", "취향에 맞는 여행지 추천을 위해 최소 한 개 이상 선택해 주세요.");
@@ -78,6 +82,11 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
                     R.anim.fade_in,
                     R.anim.slide_out
             );
+
+            Bundle bundle = new Bundle();
+            bundle.putBooleanArray("mydata1", isCheckedArray);
+            myData2Fragment.setArguments(bundle);
+
             fragmentTransaction.replace(R.id.mydata_frame, myData2Fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commitAllowingStateLoss();
@@ -113,6 +122,13 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
 
     @Override
     public boolean isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3, MaterialCardView cardView4) {
+
+        isCheckedArray = new boolean[4];
+        isCheckedArray[0] = cardView1.isChecked();
+        isCheckedArray[1] = cardView2.isChecked();
+        isCheckedArray[2] = cardView3.isChecked();
+        isCheckedArray[3] = cardView4.isChecked();
+
         return cardView1.isChecked() || cardView2.isChecked() || cardView3.isChecked() || cardView4.isChecked();
     }
 }

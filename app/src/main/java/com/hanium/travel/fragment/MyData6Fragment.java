@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.hanium.travel.R;
-import com.hanium.travel.validclass.ValidationEdit;
 import com.hanium.travel.activity.MainActivity;
+import com.hanium.travel.activity.ProgressingMyDataActivity;
+import com.hanium.travel.validclass.ValidationEdit;
 
 public class MyData6Fragment extends Fragment implements ValidationEdit {
 
@@ -54,7 +57,18 @@ public class MyData6Fragment extends Fragment implements ValidationEdit {
                     email.setError("이메일 형식에 맞지 않아요!");
                     break;
                 default:
-                    Intent intent = new Intent(requireActivity(), MainActivity.class);
+                    String[] valueArray = new String[3];
+                    valueArray[0] = nickname.getText().toString().trim();
+                    valueArray[1] = age.getText().toString().trim();
+                    valueArray[2] = email.getText().toString().trim();
+
+                    Intent intent = new Intent(requireActivity(), ProgressingMyDataActivity.class);
+                    intent.putExtra("mydata1", getArguments().getBooleanArray("mydata1"));
+                    intent.putExtra("mydata2", getArguments().getBooleanArray("mydata2"));
+                    intent.putExtra("mydata3", getArguments().getBooleanArray("mydata3"));
+                    intent.putExtra("mydata4", getArguments().getBooleanArray("mydata4"));
+                    intent.putExtra("mydata5", getArguments().getStringArray("mydata5"));
+                    intent.putExtra("mydata6", valueArray);
                     startActivity(intent);
                     requireActivity().finish();
                     break;

@@ -60,6 +60,19 @@ public class MyData5Fragment extends Fragment implements ValidationEdit {
                             R.anim.fade_in,
                             R.anim.slide_out
                     );
+
+                    String[] valueArray = new String[2];
+                    valueArray[0] = minMoney.getText().toString().trim();
+                    valueArray[1] = maxMoney.getText().toString().trim();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putBooleanArray("mydata1", getArguments().getBooleanArray("mydata1"));
+                    bundle.putBooleanArray("mydata2", getArguments().getBooleanArray("mydata2"));
+                    bundle.putBooleanArray("mydata3", getArguments().getBooleanArray("mydata3"));
+                    bundle.putBooleanArray("mydata4", getArguments().getBooleanArray("mydata4"));
+                    bundle.putStringArray("mydata5", valueArray);
+                    myData6Fragment.setArguments(bundle);
+
                     fragmentTransaction.replace(R.id.mydata_frame, myData6Fragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commitAllowingStateLoss();

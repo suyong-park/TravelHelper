@@ -25,6 +25,8 @@ public class MyData3Fragment extends Fragment implements ValidationCard {
     private MaterialCardView tour_card;
     private MaterialCardView healing_card;
 
+    private boolean[] isCheckedArray;
+
     public static MyData3Fragment newInstance() {
         MyData3Fragment myData3Fragment = new MyData3Fragment();
         return myData3Fragment;
@@ -74,6 +76,13 @@ public class MyData3Fragment extends Fragment implements ValidationCard {
                     R.anim.fade_in,
                     R.anim.slide_out
             );
+
+            Bundle bundle = new Bundle();
+            bundle.putBooleanArray("mydata1", getArguments().getBooleanArray("mydata1"));
+            bundle.putBooleanArray("mydata2", getArguments().getBooleanArray("mydata2"));
+            bundle.putBooleanArray("mydata3", isCheckedArray);
+            myData4Fragment.setArguments(bundle);
+
             fragmentTransaction.replace(R.id.mydata_frame, myData4Fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commitAllowingStateLoss();
@@ -109,6 +118,13 @@ public class MyData3Fragment extends Fragment implements ValidationCard {
 
     @Override
     public boolean isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3, MaterialCardView cardView4) {
+
+        isCheckedArray = new boolean[4];
+        isCheckedArray[0] = cardView1.isChecked();
+        isCheckedArray[1] = cardView2.isChecked();
+        isCheckedArray[2] = cardView3.isChecked();
+        isCheckedArray[3] = cardView4.isChecked();
+
         return cardView1.isChecked() || cardView2.isChecked() || cardView3.isChecked() || cardView4.isChecked();
     }
 }
