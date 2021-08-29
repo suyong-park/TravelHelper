@@ -9,17 +9,28 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.hanium.travel.R;
+import com.hanium.travel.ValidationCard;
+import com.hanium.travel.project.SingleTon;
 
-public class MyData4Fragment extends Fragment {
+public class MyData4Fragment extends Fragment implements ValidationCard {
 
     private MaterialCardView lover_card;
     private MaterialCardView friend_card;
     private MaterialCardView family_card;
     private MaterialCardView solo_card;
+
+    private boolean isValid = false;
+
+    public static MyData4Fragment newInstance() {
+        MyData4Fragment myData4Fragment = new MyData4Fragment();
+        return myData4Fragment;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata4, container, false);
@@ -44,6 +55,31 @@ public class MyData4Fragment extends Fragment {
         family_card.setOnClickListener(onClickListener);
         solo_card.setOnClickListener(onClickListener);
 
+        View nextBtnView = requireActivity().findViewById(R.id.next_btn);
+        nextBtnView.setOnClickListener(btnView -> {
+            isValid = isSelectCard(lover_card, friend_card, family_card, solo_card);
+
+            if(!isValid) {
+                setDialog();
+                return;
+            }
+
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            MyData5Fragment myData5Fragment = new MyData5Fragment();
+
+            fragmentTransaction.setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+            );
+            fragmentTransaction.replace(R.id.mydata_frame, myData5Fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commitAllowingStateLoss();
+        });
+
         return view;
     }
 
@@ -66,4 +102,22 @@ public class MyData4Fragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void setDialog() {
+        SingleTon.alertDialogNoButton(requireActivity(), "선택해 주세요!", "취향에 맞는 여행지 추천을 위해 최소 한 개 이상 선택해 주세요.")
+                .setDecorView(requireActivity().getWindow().getDecorView())
+                .build()
+                .show();
+    }
+
+    @Override
+    public boolean isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3) {
+        return false;
+    }
+
+    @Override
+    public boolean isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3, MaterialCardView cardView4) {
+        return cardView1.isChecked() || cardView2.isChecked() || cardView3.isChecked() || cardView4.isChecked();
+    }
 }

@@ -24,8 +24,7 @@ public class SingleTon {
                 .setPositiveColor(R.color.negative)
                 .setPositiveTypeface(Typeface.DEFAULT_BOLD)
                 .setNegativeText(negative)
-                .setNegativeColor(R.color.positive)
-                ;
+                .setNegativeColor(R.color.positive);
         /* 개발자 구현
         .setOnPositiveClicked()
         .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
@@ -35,24 +34,11 @@ public class SingleTon {
          */
     }
 
-    public static CustomAlertDialogue.Builder alertDialogOneButton(Activity activity, String title, String message, String buttonText) {
+    public static CustomAlertDialogue.Builder alertDialogNoButton(Activity activity, String title, String message) {
         return new CustomAlertDialogue.Builder(activity)
                 .setStyle(CustomAlertDialogue.Style.DIALOGUE)
                 .setTitle(title)
-                .setMessage(message)
-                .setNegativeText(buttonText)
-                .setNegativeColor(R.color.negative)
-                .setNegativeTypeface(Typeface.DEFAULT_BOLD)
-                .build();
-        /* 개발자 구현
-        .setOnNegativeClicked(new CustomAlertDialogue.OnNegativeClicked() {
-                    @Override
-                    public void OnClick(View view, Dialog dialog) {
-
-                    }
-                })
-        .setDecorView(getWindow().getDecorView())
-         */
+                .setMessage(message);
     }
 
     public static void hideKeyboard(Activity activity) { // Fragment 키보드 내리기

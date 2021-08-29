@@ -6,8 +6,22 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
+    <!-- AddUserActivity -->
+    <!-- CollectMydataActivity -->
+
+    <!-- MainActivity -->
     <string name="menu_modify_mydata">여행 취향 수정하기</string>
     <string name="menu_end_service">회원 탈퇴</string>
     <string name="menu_QR">QR 체크인</string>
     <string name="menu_destinations_visited">방문했던 여행지</string>
+
+
+    <!-- ProcessingMyDataActivity -->
+    <!-- RecommendTravelActivity -->
+    <!-- SelectLocActivity -->
+
+    <!-- MyData0Fragment -->
+
+
+
 </resources>

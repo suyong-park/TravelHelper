@@ -10,24 +10,33 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
+import com.hanium.travel.ValidationCard;
 import com.hanium.travel.activity.CollectMyDataActivity;
 import com.hanium.travel.R;
 import com.hanium.travel.project.SingleTon;
 
 import stream.customalert.CustomAlertDialogue;
 
-public class MyData1Fragment extends Fragment {
+public class MyData1Fragment extends Fragment implements ValidationCard {
 
     private MaterialCardView car_card;
     private MaterialCardView public_card;
     private MaterialCardView bike_card;
     private MaterialCardView walk_card;
 
-    private int count = 0;
+    private boolean isValid = false;
 
+    public static MyData1Fragment newInstance() {
+        MyData1Fragment myData1Fragment = new MyData1Fragment();
+        return myData1Fragment;
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mydata1, container, false);
 
@@ -53,6 +62,31 @@ public class MyData1Fragment extends Fragment {
         public_card.setOnClickListener(onClickListener);
         walk_card.setOnClickListener(onClickListener);
 
+        View nextBtnView = requireActivity().findViewById(R.id.next_btn);
+        nextBtnView.setOnClickListener(btnView -> {
+            isValid = isSelectCard(car_card, bike_card, public_card, walk_card);
+
+            if(!isValid) {
+                setDialog();
+                return;
+            }
+
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            MyData2Fragment myData2Fragment = new MyData2Fragment();
+
+            fragmentTransaction.setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+            );
+            fragmentTransaction.replace(R.id.mydata_frame, myData2Fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commitAllowingStateLoss();
+        });
+
         return view;
     }
 
@@ -76,17 +110,21 @@ public class MyData1Fragment extends Fragment {
         }
     };
 
-    public void isValid() {
-        isSelectCard(car_card, bike_card, public_card, walk_card);
+    @Override
+    public void setDialog() {
+        SingleTon.alertDialogNoButton(requireActivity(), "선택해 주세요!", "취향에 맞는 여행지 추천을 위해 최소 한 개 이상 선택해 주세요.")
+                .setDecorView(requireActivity().getWindow().getDecorView())
+                .build()
+                .show();
     }
 
-    public void isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3, MaterialCardView cardView4) {
-        if(!cardView1.isChecked() && !cardView2.isChecked() && !cardView3.isChecked() && !cardView4.isChecked())
-            SingleTon.alertDialogOneButton(requireActivity(), "선택!", "조금이라도 더 취향에 맞을 수 있는 여행지 추천을 위해 최소 한 개 이상 선택해 주세요.",
-                    "확인")
-                    .setOnNegativeClicked(null)
-                    .setDecorView(requireActivity().getWindow().getDecorView())
-                    .build()
-                    .show();
+    @Override
+    public boolean isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3) {
+        return false;
+    }
+
+    @Override
+    public boolean isSelectCard(MaterialCardView cardView1, MaterialCardView cardView2, MaterialCardView cardView3, MaterialCardView cardView4) {
+        return cardView1.isChecked() || cardView2.isChecked() || cardView3.isChecked() || cardView4.isChecked();
     }
 }
