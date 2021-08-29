@@ -40,26 +40,31 @@ public class MyData5Fragment extends Fragment implements ValidationEdit {
                 return;
             }
 
-            isValid = isDataValid(minMoney, maxMoney);
-            if(!isValid) {
-                setDialog(requireActivity(), "OOPS !", "최대 금액에는 최소 금액보다 큰 금액을 기재해 주셔야 해요!");
-                return;
+            int isDataValid = isDataValid(minMoney, maxMoney);
+            switch (isDataValid) {
+                case 1 :
+                    setDialog(requireActivity(), "OOPS !", "최대 금액에는 최소 금액보다 큰 금액을 기재해 주셔야 해요!");
+                    break;
+                case 2 :
+                    minMoney.setError("금액은 1만원보다 커야 해요!");
+                    break;
+                default :
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                    MyData6Fragment myData6Fragment = new MyData6Fragment();
+
+                    fragmentTransaction.setCustomAnimations(
+                            R.anim.slide_in,
+                            R.anim.fade_out,
+                            R.anim.fade_in,
+                            R.anim.slide_out
+                    );
+                    fragmentTransaction.replace(R.id.mydata_frame, myData6Fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commitAllowingStateLoss();
+                    break;
             }
-
-            FragmentManager fragmentManager = getParentFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            MyData6Fragment myData6Fragment = new MyData6Fragment();
-
-            fragmentTransaction.setCustomAnimations(
-                    R.anim.slide_in,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out
-            );
-            fragmentTransaction.replace(R.id.mydata_frame, myData6Fragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commitAllowingStateLoss();
         });
 
         return view;
@@ -76,11 +81,15 @@ public class MyData5Fragment extends Fragment implements ValidationEdit {
     }
 
     @Override
-    public boolean isDataValid(TextInputEditText editText1, TextInputEditText editText2) {
+    public int isDataValid(TextInputEditText editText1, TextInputEditText editText2) {
         int minMoney = Integer.parseInt(editText1.getText().toString().trim());
         int maxMoney = Integer.parseInt(editText2.getText().toString().trim());
 
-        return minMoney < maxMoney;
+        if(minMoney > maxMoney)
+            return 1;
+        if(minMoney < 10000)
+            return 2;
+        return 0;
     }
 
     @Override

@@ -44,34 +44,22 @@ public class MyData6Fragment extends Fragment implements ValidationEdit {
 
             int isDataValid = isDataValid(nickname, age, email);
             switch (isDataValid) {
-                case 0 : // nickname
+                case 1 : // nickname
+                    nickname.setError("닉네임에 특수 문자는 안돼요!");
                     break;
-                case 1: // age
+                case 2: // age
+                    age.setError("나이는 0살보다 많아야 해요!");
                     break;
-                case 2: // email
+                case 3: // email
+                    email.setError("이메일 형식에 맞지 않아요!");
+                    break;
+                default:
+                    Intent intent = new Intent(requireActivity(), MainActivity.class);
+                    startActivity(intent);
+                    requireActivity().finish();
                     break;
             }
-
-            Intent intent = new Intent(requireActivity(), MainActivity.class);
-            startActivity(intent);
-            requireActivity().finish();
         });
-
-
-        /*
-        nickname.setFilters(new InputFilter[]{
-                (charSequence, i, i1, spanned, i2, i3) -> {
-                    Pattern pattern = Pattern.compile("^[a-zA-Z0-9가-힣ㄱ-ㅎ ㅏ-ㅣ \\u318D\\u119E\\u11A2\\u2022\\u2025a\\u00B7\\uFE55]+$"); // 특수 문자 걸러내기
-                    if(pattern.matcher(charSequence).matches()) {
-                        nickname.setError(null);
-                        return charSequence;
-                    }
-                    nickname.setError("특수 문자는 입력할 수 없습니다.");
-                    return null;
-                }
-        });
-         */
-
 
         return view;
     }
@@ -87,8 +75,8 @@ public class MyData6Fragment extends Fragment implements ValidationEdit {
     }
 
     @Override
-    public boolean isDataValid(TextInputEditText editText1, TextInputEditText editText2) {
-        return false;
+    public int isDataValid(TextInputEditText editText1, TextInputEditText editText2) {
+        return 0;
     }
 
     @Override
@@ -98,10 +86,12 @@ public class MyData6Fragment extends Fragment implements ValidationEdit {
         int age = Integer.parseInt(editText2.getText().toString().trim());
         String email = editText3.getText().toString().trim();
 
-
-        
-
-
+        if(!nickname.matches("^[ㄱ-ㅎ가-힣a-zA-Z0-9]*$"))
+            return 1;
+        if(age <= 0)
+            return 2;
+        if(!email.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$"))
+            return 3;
         return 0;
     }
 }

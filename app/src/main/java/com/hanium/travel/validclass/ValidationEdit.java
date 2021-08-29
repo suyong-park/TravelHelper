@@ -1,6 +1,7 @@
 package com.hanium.travel.validclass;
 
 import android.app.Activity;
+import android.view.Gravity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.hanium.travel.project.SingleTon;
@@ -17,6 +18,6 @@ public interface ValidationEdit {
     boolean isEnterAllValue(TextInputEditText editText1, TextInputEditText editText2);
     boolean isEnterAllValue(TextInputEditText editText1, TextInputEditText editText2, TextInputEditText editText3);
 
-    boolean isDataValid(TextInputEditText editText1, TextInputEditText editText2);
+    int isDataValid(TextInputEditText editText1, TextInputEditText editText2);
     int isDataValid(TextInputEditText editText1, TextInputEditText editText2, TextInputEditText editText3);
 }
