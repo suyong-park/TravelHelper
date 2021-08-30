@@ -32,6 +32,22 @@ public class SingleTon {
          */
     }
 
+    public static CustomAlertDialogue.Builder alertDialogOneButton(Activity activity, String title, String message, String negative) {
+        return new CustomAlertDialogue.Builder(activity)
+                .setStyle(CustomAlertDialogue.Style.DIALOGUE)
+                .setCancelable(false)
+                .setTitle(title)
+                .setMessage(message)
+                .setNegativeText(negative)
+                .setNegativeColor(R.color.positive);
+        /* 개발자 구현
+        .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
+        .setDecorView(getWindow().getDecorView())
+        .build
+        .show
+         */
+    }
+
     public static CustomAlertDialogue.Builder alertDialogNoButton(Activity activity, String title, String message) {
         return new CustomAlertDialogue.Builder(activity)
                 .setStyle(CustomAlertDialogue.Style.DIALOGUE)
