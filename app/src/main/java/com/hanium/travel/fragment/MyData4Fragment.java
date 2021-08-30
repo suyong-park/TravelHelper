@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.hanium.travel.R;
+import com.hanium.travel.project.PreferenceManager;
 import com.hanium.travel.validclass.ValidationCard;
 import com.hanium.travel.project.SingleTon;
 
@@ -55,6 +56,23 @@ public class MyData4Fragment extends Fragment implements ValidationCard {
         family_card.setOnClickListener(onClickListener);
         solo_card.setOnClickListener(onClickListener);
 
+        if(PreferenceManager.getBoolean(requireActivity(), "isFirst4"))
+            for(int i = 0; i < 4; i++)
+                switch (i) {
+                    case 0 :
+                        lover_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata4-" + i));
+                        break;
+                    case 1 :
+                        friend_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata4-" + i));
+                        break;
+                    case 2 :
+                        family_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata4-" + i));
+                        break;
+                    case 3 :
+                        solo_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata4-" + i));
+                        break;
+                }
+
         View nextBtnView = requireActivity().findViewById(R.id.next_btn);
         nextBtnView.setOnClickListener(btnView -> {
 
@@ -76,6 +94,10 @@ public class MyData4Fragment extends Fragment implements ValidationCard {
                     R.anim.fade_in,
                     R.anim.slide_out
             );
+
+            for(int i = 0; i < isCheckedArray.length; i++)
+                PreferenceManager.setBoolean(requireActivity(), "mydata4-" + i, isCheckedArray[i]);
+            PreferenceManager.setBoolean(requireActivity(), "isFirst4", true);
 
             Bundle bundle = new Bundle();
             bundle.putBooleanArray("mydata1", getArguments().getBooleanArray("mydata1"));

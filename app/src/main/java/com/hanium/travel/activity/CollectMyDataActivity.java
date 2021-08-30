@@ -22,6 +22,7 @@ import com.hanium.travel.fragment.MyData3Fragment;
 import com.hanium.travel.fragment.MyData4Fragment;
 import com.hanium.travel.fragment.MyData5Fragment;
 import com.hanium.travel.fragment.MyData6Fragment;
+import com.hanium.travel.project.PreferenceManager;
 import com.hanium.travel.project.SingleTon;
 
 public class CollectMyDataActivity extends AppCompatActivity {

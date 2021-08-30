@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.hanium.travel.R;
 import com.hanium.travel.activity.MainActivity;
 import com.hanium.travel.activity.ProgressingMyDataActivity;
+import com.hanium.travel.project.PreferenceManager;
 import com.hanium.travel.validclass.ValidationEdit;
 
 public class MyData6Fragment extends Fragment implements ValidationEdit {
@@ -35,6 +36,20 @@ public class MyData6Fragment extends Fragment implements ValidationEdit {
         nickname = view.findViewById(R.id.nickname_enter);
         age = view.findViewById(R.id.age_enter);
         email = view.findViewById(R.id.email_enter);
+
+        if(PreferenceManager.getBoolean(requireActivity(), "isFirst6"))
+            for(int i = 0; i < 3; i++)
+                switch (i) {
+                    case 0 :
+                        nickname.setText(PreferenceManager.getString(requireActivity(), "mydata6-" + i));
+                        break;
+                    case 1 :
+                        age.setText(PreferenceManager.getString(requireActivity(), "mydata6-" + i));
+                        break;
+                    case 2 :
+                        email.setText(PreferenceManager.getString(requireActivity(), "mydata6-" + i));
+                        break;
+                }
 
         View nextBtnView = requireActivity().findViewById(R.id.next_btn);
         nextBtnView.setOnClickListener(btnView -> {
@@ -61,6 +76,10 @@ public class MyData6Fragment extends Fragment implements ValidationEdit {
                     valueArray[0] = nickname.getText().toString().trim();
                     valueArray[1] = age.getText().toString().trim();
                     valueArray[2] = email.getText().toString().trim();
+
+                    for(int i = 0; i < valueArray.length; i++)
+                        PreferenceManager.setString(requireActivity(), "mydata6-" + i, valueArray[i]);
+                    PreferenceManager.setBoolean(requireActivity(), "isFirst6", true);
 
                     Intent intent = new Intent(requireActivity(), ProgressingMyDataActivity.class);
                     intent.putExtra("mydata1", getArguments().getBooleanArray("mydata1"));

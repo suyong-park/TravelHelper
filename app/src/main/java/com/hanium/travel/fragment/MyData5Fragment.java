@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.hanium.travel.R;
+import com.hanium.travel.project.PreferenceManager;
 import com.hanium.travel.validclass.ValidationEdit;
 
 public class MyData5Fragment extends Fragment implements ValidationEdit {
@@ -30,6 +31,17 @@ public class MyData5Fragment extends Fragment implements ValidationEdit {
 
         minMoney = view.findViewById(R.id.min_money);
         maxMoney = view.findViewById(R.id.max_money);
+
+        if(PreferenceManager.getBoolean(requireActivity(), "isFirst5"))
+            for(int i = 0; i < 2; i++)
+                switch (i) {
+                    case 0 :
+                        minMoney.setText(PreferenceManager.getString(requireActivity(), "mydata5-" + i));
+                        break;
+                    case 1 :
+                        maxMoney.setText(PreferenceManager.getString(requireActivity(), "mydata5-" + i));
+                        break;
+                }
 
         View nextBtnView = requireActivity().findViewById(R.id.next_btn);
         nextBtnView.setOnClickListener(btnView -> {
@@ -64,6 +76,10 @@ public class MyData5Fragment extends Fragment implements ValidationEdit {
                     String[] valueArray = new String[2];
                     valueArray[0] = minMoney.getText().toString().trim();
                     valueArray[1] = maxMoney.getText().toString().trim();
+
+                    for(int i = 0; i < valueArray.length; i++)
+                        PreferenceManager.setString(requireActivity(), "mydata5-" + i, valueArray[i]);
+                    PreferenceManager.setBoolean(requireActivity(), "isFirst5", true);
 
                     Bundle bundle = new Bundle();
                     bundle.putBooleanArray("mydata1", getArguments().getBooleanArray("mydata1"));

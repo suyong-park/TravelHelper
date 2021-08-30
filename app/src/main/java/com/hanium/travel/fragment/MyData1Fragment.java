@@ -1,6 +1,5 @@
 package com.hanium.travel.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +14,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
-import com.hanium.travel.activity.MainActivity;
 import com.hanium.travel.validclass.ValidationCard;
 import com.hanium.travel.activity.CollectMyDataActivity;
 import com.hanium.travel.R;
-import com.hanium.travel.project.SingleTon;
+import com.hanium.travel.project.PreferenceManager;
 
 public class MyData1Fragment extends Fragment implements ValidationCard {
 
@@ -61,6 +59,23 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
         public_card.setOnClickListener(onClickListener);
         walk_card.setOnClickListener(onClickListener);
 
+        if(PreferenceManager.getBoolean(requireActivity(), "isFirst1"))
+            for(int i = 0; i < 4; i++)
+                switch (i) {
+                    case 0 :
+                        walk_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata1-" + i));
+                        break;
+                    case 1 :
+                        bike_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata1-" + i));
+                        break;
+                    case 2 :
+                        public_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata1-" + i));
+                        break;
+                    case 3 :
+                        car_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata1-" + i));
+                        break;
+                }
+
         View nextBtnView = requireActivity().findViewById(R.id.next_btn);
         nextBtnView.setOnClickListener(btnView -> {
 
@@ -82,6 +97,10 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
                     R.anim.fade_in,
                     R.anim.slide_out
             );
+
+            for(int i = 0; i < isCheckedArray.length; i++)
+                PreferenceManager.setBoolean(requireActivity(), "mydata1-" + i, isCheckedArray[i]);
+            PreferenceManager.setBoolean(requireActivity(), "isFirst1", true);
 
             Bundle bundle = new Bundle();
             bundle.putBooleanArray("mydata1", isCheckedArray);

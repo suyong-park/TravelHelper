@@ -3,7 +3,7 @@ package com.hanium.travel.project;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-class PreferenceManager {
+public class PreferenceManager {
 
     public static final String PREFERENCES_NAME = "preference_manager";
     private static final String DEFAULT_VALUE_STRING = "";

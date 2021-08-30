@@ -3,10 +3,8 @@ package com.hanium.travel.project;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.hanium.travel.R;
 
 import stream.customalert.CustomAlertDialogue;

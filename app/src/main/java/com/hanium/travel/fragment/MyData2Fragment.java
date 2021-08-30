@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.hanium.travel.R;
+import com.hanium.travel.project.PreferenceManager;
 import com.hanium.travel.validclass.ValidationCard;
 import com.hanium.travel.project.SingleTon;
 
@@ -50,6 +51,20 @@ public class MyData2Fragment extends Fragment implements ValidationCard {
         mountain_card.setOnClickListener(onClickListener);
         city_card.setOnClickListener(onClickListener);
 
+        if(PreferenceManager.getBoolean(requireActivity(), "isFirst2"))
+            for(int i = 0; i < 3; i++)
+                switch (i) {
+                    case 0 :
+                        sea_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata2-" + i));
+                        break;
+                    case 1 :
+                        mountain_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata2-" + i));
+                        break;
+                    case 2 :
+                        city_card.setChecked(PreferenceManager.getBoolean(requireActivity(), "mydata2-" + i));
+                        break;
+                }
+
         View nextBtnView = requireActivity().findViewById(R.id.next_btn);
         nextBtnView.setOnClickListener(btnView -> {
 
@@ -71,6 +86,10 @@ public class MyData2Fragment extends Fragment implements ValidationCard {
                     R.anim.fade_in,
                     R.anim.slide_out
             );
+
+            for(int i = 0; i < isCheckedArray.length; i++)
+                PreferenceManager.setBoolean(requireActivity(), "mydata2-" + i, isCheckedArray[i]);
+            PreferenceManager.setBoolean(requireActivity(), "isFirst2", true);
 
             Bundle bundle = new Bundle();
             bundle.putBooleanArray("mydata1", getArguments().getBooleanArray("mydata1"));
