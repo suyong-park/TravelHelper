@@ -7,8 +7,7 @@ import retrofit2.http.POST;
 
 public interface ConnectServer {
 
-    String IP_ADDRESS = "https://115.85.180.60:8080/server/";
-    //String IP_ADDRESS = "https://115.85.180.60:8080/";
+    public static String IP_ADDRESS = "http://115.85.180.60/server/";
 
     @FormUrlEncoded
     @POST("test.php")
@@ -22,9 +21,9 @@ public interface ConnectServer {
     );
 
     @FormUrlEncoded
-    @POST("insert.php")
-    Call<String> sendTestData(
-            @Field("name") String name,
-            @Field("country") String country
+    @POST("P_cost.php")
+    Call<Void> sendTestData(
+            @Field("minimum") String min,
+            @Field("maximum") String max
     );
 }

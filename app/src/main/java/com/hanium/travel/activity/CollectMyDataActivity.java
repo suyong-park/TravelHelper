@@ -1,13 +1,9 @@
 package com.hanium.travel.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -15,14 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.hanium.travel.R;
-import com.hanium.travel.fragment.MyData0Fragment;
-import com.hanium.travel.fragment.MyData1Fragment;
-import com.hanium.travel.fragment.MyData2Fragment;
-import com.hanium.travel.fragment.MyData3Fragment;
-import com.hanium.travel.fragment.MyData4Fragment;
-import com.hanium.travel.fragment.MyData5Fragment;
-import com.hanium.travel.fragment.MyData6Fragment;
-import com.hanium.travel.project.PreferenceManager;
+import com.hanium.travel.fragment.mydata.MyData0Fragment;
 import com.hanium.travel.project.SingleTon;
 
 public class CollectMyDataActivity extends AppCompatActivity {

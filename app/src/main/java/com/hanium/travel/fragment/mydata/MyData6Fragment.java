@@ -1,4 +1,4 @@
-package com.hanium.travel.fragment;
+package com.hanium.travel.fragment.mydata;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.hanium.travel.R;
-import com.hanium.travel.activity.MainActivity;
 import com.hanium.travel.activity.ProgressingMyDataActivity;
 import com.hanium.travel.project.PreferenceManager;
 import com.hanium.travel.validclass.ValidationEdit;

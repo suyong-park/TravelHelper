@@ -6,19 +6,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
+import com.hanium.travel.BuildConfig;
 import com.hanium.travel.R;
+import com.hanium.travel.fragment.main.SettingFragment;
+import com.hanium.travel.fragment.mydata.MyData2Fragment;
+import com.hanium.travel.project.PreferenceManager;
 import com.hanium.travel.project.SingleTon;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private MaterialCardView plan_card;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
+    private NavigationView navigationView;
 
     private boolean isDrawerOpen;
 
@@ -56,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
         plan_card.setOnClickListener(onClickListener);
 
         drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
+
+        setNavigationUserInfo();
 
         navigationView.setNavigationItemSelectedListener(item -> {
             item.setChecked(true);
@@ -80,6 +91,42 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(id == R.id.nav_destination_visited) { // navigation drawer : 방문했던 여행지
                 Toast.makeText(MainActivity.this, "방문했던 여행지", Toast.LENGTH_SHORT).show();
+            }
+            else if(id == R.id.nav_bookmark) { // navigation drawer : 찜 목록
+
+            }
+            else if(id == R.id.nav_setting) { // navigation drawer : 환경설정
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent);
+            }
+            else if(id == R.id.nav_error_report) { // navigation drawer : 앱 내 에러 전송
+
+                String appVersion = String.valueOf(Build.VERSION.SDK_INT);
+                String androidVersion = BuildConfig.VERSION_NAME;
+                String androidModel = Build.MODEL;
+
+                String emailText = "Android App Version : " + appVersion + "\nAndroid OS Version : " + androidVersion + "\nAndroid Device : " + androidModel + "\n에러 내용(여기 작성해 주세요!) : ";
+
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.setType("plain/text");
+                String[] address = {"spdlqjfire@gmail.com"};
+                email.putExtra(Intent.EXTRA_EMAIL, address);
+                email.putExtra(Intent.EXTRA_SUBJECT, "나드리 Application Error Report");
+                email.putExtra(Intent.EXTRA_TEXT, emailText);
+                startActivity(email);
+            }
+            else if(id == R.id.nav_logout) { // navigation drawer : 로그아웃
+                SingleTon.alertDialogTwoButton(MainActivity.this, "로그아웃", "로그아웃시 로그인 화면으로 돌아가요. 취향 정보는 저장되니 걱정 마세요!",
+                        "로그아웃", "안할게요")
+                        .setOnPositiveClicked((view, dialog) -> {
+                            PreferenceManager.setBoolean(MainActivity.this, "isLogin", false);
+                            Intent intent = new Intent(MainActivity.this, AddUserActivity.class);
+                            startActivity(intent);
+                            finish();
+                        })
+                        .setOnNegativeClicked((view, dialog) -> dialog.dismiss())
+                        .setDecorView(getWindow().getDecorView())
+                        .build().show();
             }
 
             return true;
@@ -143,5 +190,16 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setNavigationUserInfo() {
+
+        View navView = navigationView.getHeaderView(0);
+
+        TextView userNickName = navView.findViewById(R.id.nickname_nav_show);
+        TextView userEmail = navView.findViewById(R.id.email_nav_show);
+
+        userNickName.setText(PreferenceManager.getString(MainActivity.this, "mydata6-0"));
+        userEmail.setText(PreferenceManager.getString(MainActivity.this, "mydata6-2"));
     }
 }

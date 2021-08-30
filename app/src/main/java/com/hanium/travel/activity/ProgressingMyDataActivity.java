@@ -40,15 +40,15 @@ public class ProgressingMyDataActivity extends AppCompatActivity {
 
 
         ConnectServer connectServer = Request.getRetrofit().create(ConnectServer.class);
-        /*
-        Call<String> call = connectServer.sendTestData("이름", "국적은?");
+
+        Call<Void> call = connectServer.sendTestData("10000", "15000");
         System.out.println("통신 전입니다.");
-        call.enqueue(new Callback<String>() {
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 System.out.println("통신 시도 ...");
-                String result = response.body();
-                System.out.println("결과값 : " + result);
+                System.out.println("결과값 : " + response.body());
+                //System.out.println("결과값 : " + result);
 
                 Intent intent1 = new Intent(ProgressingMyDataActivity.this, MainActivity.class);
                 startActivity(intent1);
@@ -56,14 +56,14 @@ public class ProgressingMyDataActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 System.out.println("통신 실패");
                 System.out.println(t.getMessage());
+                System.out.println(t.fillInStackTrace());
             }
         });
-         */
 
-
+        /*
         Call<String> call = connectServer.sendMyData(mydata1, mydata2, mydata3, mydata4, mydata5, mydata6);
         System.out.println("통신 전입니다.");
         call.enqueue(new Callback<String>() {
@@ -83,12 +83,14 @@ public class ProgressingMyDataActivity extends AppCompatActivity {
                 System.out.println("통신 실패");
                 System.out.println(t.getMessage());
 
-                /* 통신 테스트 및 성공시 아래 코드 삭제 */
+                /* 통신 테스트 및 성공시 아래 코드 삭제
                 Intent intent1 = new Intent(ProgressingMyDataActivity.this, MainActivity.class);
                 startActivity(intent1);
                 finish();
+
             }
         });
+        */
     }
 
     private void setCircularProgressBar() {

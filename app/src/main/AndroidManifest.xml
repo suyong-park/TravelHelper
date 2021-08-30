@@ -17,10 +17,23 @@
             android:name=".activity.MainActivity"
             android:theme="@style/Theme.TravelHelper.NoActionBar" >
         </activity>
-        <activity android:name=".activity.SelectLocActivity" />
-        <activity android:name=".activity.RecommendTravelActivity" />
         <activity
-            android:name=".activity.ProgressingMyDataActivity" />
+            android:name=".activity.SelectLocActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.RecommendTravelActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activity.MainActivity">
+        </activity>
+        <activity
+            android:name=".activity.ProgressingMyDataActivity"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".activity.CollectMyDataActivity"
             android:screenOrientation="portrait"

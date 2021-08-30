@@ -1,4 +1,4 @@
-package com.hanium.travel.fragment;
+package com.hanium.travel.fragment.mydata;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +17,6 @@ import com.google.android.material.card.MaterialCardView;
 import com.hanium.travel.R;
 import com.hanium.travel.project.PreferenceManager;
 import com.hanium.travel.validclass.ValidationCard;
-import com.hanium.travel.project.SingleTon;
 
 public class MyData4Fragment extends Fragment implements ValidationCard {
 

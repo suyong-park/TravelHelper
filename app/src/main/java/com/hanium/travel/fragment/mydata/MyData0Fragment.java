@@ -1,4 +1,4 @@
-package com.hanium.travel.fragment;
+package com.hanium.travel.fragment.mydata;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
