@@ -5,9 +5,11 @@ import android.text.InputType;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.hanium.travel.R;
+import com.hanium.travel.activity.MainActivity;
 import com.hanium.travel.activity.SettingActivity;
 import com.hanium.travel.project.PreferenceManager;
 
@@ -28,6 +30,9 @@ public class SettingFragment extends PreferenceFragmentCompat {
 
         EditTextPreference modifyNickName = findPreference("modify_nickname");
         EditTextPreference modifyEmail = findPreference("modify_email");
+        SwitchPreferenceCompat setAlarm = findPreference("set_alarm");
+        SwitchPreferenceCompat setMarketing = findPreference("agree_marketing");
+        SwitchPreferenceCompat setAutoLogin = findPreference("auto_login");
 
         if(modifyNickName != null && modifyEmail != null) {
 
@@ -56,6 +61,12 @@ public class SettingFragment extends PreferenceFragmentCompat {
                 Snackbar.make(activity.settingLayout, "이메일 형식에 맞지 않아요!", Snackbar.LENGTH_LONG).show();
                 return PreferenceManager.getString(activity, "mydata6-2");
             });
+        }
+
+        if(setAlarm != null && setAutoLogin != null && setMarketing != null) {
+
+            setAutoLogin.setChecked(PreferenceManager.getBoolean(activity, "isLogin"));
+
         }
     }
 }

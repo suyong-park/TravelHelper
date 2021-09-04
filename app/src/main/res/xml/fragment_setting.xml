@@ -24,6 +24,10 @@
             app:key="agree_marketing"
             app:title="마케팅 수신 동의" />
 
+        <SwitchPreferenceCompat
+            app:key="auto_login"
+            app:title="자동 로그인" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -32,38 +32,16 @@ public class ProgressingMyDataActivity extends AppCompatActivity {
         String[] mydata5 = intent.getStringArrayExtra("mydata5");
         String[] mydata6 = intent.getStringArrayExtra("mydata6");
 
+        // TODO : 여행 취향 설정 화면에서 설정하다가 중간에 나가면 그것도 값이 저장된다. 따라서, 이 화면까지 와야 저장할 수 있도록 수정하자
+
         /*
         // TEST CODE
         for(int i = 0; i < mydata1.length; i++)
             System.out.println("mydata : " + mydata1[i]);
          */
 
-
         ConnectServer connectServer = Request.getRetrofit().create(ConnectServer.class);
 
-        Call<Void> call = connectServer.sendTestData("10000", "15000");
-        System.out.println("통신 전입니다.");
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                System.out.println("통신 시도 ...");
-                System.out.println("결과값 : " + response.body());
-                //System.out.println("결과값 : " + result);
-
-                Intent intent1 = new Intent(ProgressingMyDataActivity.this, MainActivity.class);
-                startActivity(intent1);
-                finish();
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                System.out.println("통신 실패");
-                System.out.println(t.getMessage());
-                System.out.println(t.fillInStackTrace());
-            }
-        });
-
-        /*
         Call<String> call = connectServer.sendMyData(mydata1, mydata2, mydata3, mydata4, mydata5, mydata6);
         System.out.println("통신 전입니다.");
         call.enqueue(new Callback<String>() {
@@ -87,10 +65,9 @@ public class ProgressingMyDataActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(ProgressingMyDataActivity.this, MainActivity.class);
                 startActivity(intent1);
                 finish();
-
+*/
             }
         });
-        */
     }
 
     private void setCircularProgressBar() {
