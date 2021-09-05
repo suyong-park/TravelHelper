@@ -98,8 +98,6 @@ public class MyData1Fragment extends Fragment implements ValidationCard {
                     R.anim.slide_out
             );
 
-            for(int i = 0; i < isCheckedArray.length; i++)
-                PreferenceManager.setBoolean(requireActivity(), "mydata1-" + i, isCheckedArray[i]);
             PreferenceManager.setBoolean(requireActivity(), "isFirst1", true);
 
             Bundle bundle = new Bundle();

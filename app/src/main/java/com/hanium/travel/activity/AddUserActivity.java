@@ -39,7 +39,6 @@ public class AddUserActivity extends AppCompatActivity {
         //PreferenceManager.clear(AddUserActivity.this);
 
         if(PreferenceManager.getBoolean(AddUserActivity.this, "isLogin")) {
-            // TODO : 설정 화면에서 자동로그인 여부 묻기
             Toast.makeText(AddUserActivity.this, "자동로그인 됩니다.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(AddUserActivity.this, MainActivity.class);
             startActivity(intent);
@@ -52,7 +51,8 @@ public class AddUserActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PreferenceManager.setBoolean(AddUserActivity.this, "isLogin", true);
+                if(!PreferenceManager.getBoolean(AddUserActivity.this, "autoLoginOff"))
+                    PreferenceManager.setBoolean(AddUserActivity.this, "isLogin", true);
                 Intent intent = new Intent(AddUserActivity.this, CollectMyDataActivity.class);
                 startActivity(intent);
                 finish();

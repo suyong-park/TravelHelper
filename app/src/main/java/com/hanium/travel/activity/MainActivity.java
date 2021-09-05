@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Build;
@@ -24,8 +22,6 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import com.hanium.travel.BuildConfig;
 import com.hanium.travel.R;
-import com.hanium.travel.fragment.main.SettingFragment;
-import com.hanium.travel.fragment.mydata.MyData2Fragment;
 import com.hanium.travel.project.PreferenceManager;
 import com.hanium.travel.project.SingleTon;
 
@@ -79,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 SingleTon.alertDialogTwoButton(MainActivity.this, "여행 취향 수정하기", "여행 취향을 다시 설정하시겠어요?",
                         "수정할게요", "괜찮아요")
                         .setOnPositiveClicked((view, dialog) -> {
+                            PreferenceManager.setBoolean(MainActivity.this, "autoLoginOff", false);
                             Intent intent = new Intent(MainActivity.this, CollectMyDataActivity.class);
                             startActivity(intent);
                             finish();
@@ -116,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(email);
             }
             else if(id == R.id.nav_logout) { // navigation drawer : 로그아웃
-                SingleTon.alertDialogTwoButton(MainActivity.this, "로그아웃", "로그아웃시 로그인 화면으로 돌아가요. 취향 정보는 저장되니 걱정 마세요!",
+                SingleTon.alertDialogTwoButton(MainActivity.this, "로그아웃", "자동로그인이 해제되고 로그인 화면으로 돌아가요. 취향 정보는 저장되니 걱정 마세요!",
                         "로그아웃", "안할게요")
                         .setOnPositiveClicked((view, dialog) -> {
                             PreferenceManager.setBoolean(MainActivity.this, "isLogin", false);

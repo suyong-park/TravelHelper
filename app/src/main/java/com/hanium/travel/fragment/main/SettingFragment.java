@@ -9,6 +9,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.hanium.travel.R;
+import com.hanium.travel.activity.AddUserActivity;
 import com.hanium.travel.activity.MainActivity;
 import com.hanium.travel.activity.SettingActivity;
 import com.hanium.travel.project.PreferenceManager;
@@ -65,8 +66,14 @@ public class SettingFragment extends PreferenceFragmentCompat {
 
         if(setAlarm != null && setAutoLogin != null && setMarketing != null) {
 
-            setAutoLogin.setChecked(PreferenceManager.getBoolean(activity, "isLogin"));
+            System.out.println("로그인 상태 여부 : " + PreferenceManager.getBoolean(activity, "isLogin"));
 
+            setAutoLogin.setChecked(PreferenceManager.getBoolean(activity, "isLogin"));
+            setAutoLogin.setOnPreferenceChangeListener((preference, newValue) -> {
+                PreferenceManager.setBoolean(activity, "autoLoginOff", true);
+                PreferenceManager.setBoolean(activity, "isLogin", !setAutoLogin.isChecked());
+                return true; // true 값을 반환해야 UI 변화
+            });
         }
     }
 }

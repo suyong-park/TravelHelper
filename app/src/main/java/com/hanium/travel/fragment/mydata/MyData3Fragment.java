@@ -94,8 +94,6 @@ public class MyData3Fragment extends Fragment implements ValidationCard {
                     R.anim.slide_out
             );
 
-            for(int i = 0; i < isCheckedArray.length; i++)
-                PreferenceManager.setBoolean(requireActivity(), "mydata3-" + i, isCheckedArray[i]);
             PreferenceManager.setBoolean(requireActivity(), "isFirst3", true);
 
             Bundle bundle = new Bundle();

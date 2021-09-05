@@ -77,8 +77,6 @@ public class MyData5Fragment extends Fragment implements ValidationEdit {
                     valueArray[0] = minMoney.getText().toString().trim();
                     valueArray[1] = maxMoney.getText().toString().trim();
 
-                    for(int i = 0; i < valueArray.length; i++)
-                        PreferenceManager.setString(requireActivity(), "mydata5-" + i, valueArray[i]);
                     PreferenceManager.setBoolean(requireActivity(), "isFirst5", true);
 
                     Bundle bundle = new Bundle();

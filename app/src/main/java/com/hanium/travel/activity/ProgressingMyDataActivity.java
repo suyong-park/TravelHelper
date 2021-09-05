@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hanium.travel.R;
 import com.hanium.travel.connect.ConnectServer;
 import com.hanium.travel.connect.Request;
+import com.hanium.travel.project.PreferenceManager;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import retrofit2.Call;
@@ -23,6 +24,22 @@ public class ProgressingMyDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_processingmydata);
 
         setCircularProgressBar();
+        setArrayPreference();
+
+        /*
+        // TEST CODE
+        for(int i = 0; i < mydata1.length; i++)
+            System.out.println("mydata : " + mydata1[i]);
+        */
+    }
+
+    private void setCircularProgressBar() {
+        CircularProgressBar circularProgressBar = findViewById(R.id.circularProgressBar);
+        circularProgressBar.setProgressWithAnimation(65f, 1000L); // =1s
+    }
+
+    private void setArrayPreference() {
+
         Intent intent = getIntent();
 
         boolean[] mydata1 = intent.getBooleanArrayExtra("mydata1");
@@ -32,14 +49,17 @@ public class ProgressingMyDataActivity extends AppCompatActivity {
         String[] mydata5 = intent.getStringArrayExtra("mydata5");
         String[] mydata6 = intent.getStringArrayExtra("mydata6");
 
-        // TODO : 여행 취향 설정 화면에서 설정하다가 중간에 나가면 그것도 값이 저장된다. 따라서, 이 화면까지 와야 저장할 수 있도록 수정하자
+        for(int i = 0; i < mydata1.length; i++) PreferenceManager.setBoolean(this, "mydata1-" + i, mydata1[i]);
+        for(int i = 0; i < mydata2.length; i++) PreferenceManager.setBoolean(this, "mydata2-" + i, mydata2[i]);
+        for(int i = 0; i < mydata3.length; i++) PreferenceManager.setBoolean(this, "mydata3-" + i, mydata3[i]);
+        for(int i = 0; i < mydata4.length; i++) PreferenceManager.setBoolean(this, "mydata4-" + i, mydata4[i]);
+        for(int i = 0; i < mydata5.length; i++) PreferenceManager.setString(this, "mydata5-" + i, mydata5[i]);
+        for(int i = 0; i < mydata6.length; i++) PreferenceManager.setString(this, "mydata6-" + i, mydata6[i]);
 
-        /*
-        // TEST CODE
-        for(int i = 0; i < mydata1.length; i++)
-            System.out.println("mydata : " + mydata1[i]);
-         */
+        connectServer(mydata1, mydata2, mydata3, mydata4, mydata5, mydata6);
+    }
 
+    private void connectServer(boolean[] mydata1, boolean[] mydata2, boolean[] mydata3, boolean[] mydata4, String[] mydata5, String[] mydata6) {
         ConnectServer connectServer = Request.getRetrofit().create(ConnectServer.class);
 
         Call<String> call = connectServer.sendMyData(mydata1, mydata2, mydata3, mydata4, mydata5, mydata6);
@@ -61,17 +81,11 @@ public class ProgressingMyDataActivity extends AppCompatActivity {
                 System.out.println("통신 실패");
                 System.out.println(t.getMessage());
 
-                /* 통신 테스트 및 성공시 아래 코드 삭제
+                /*//통신 테스트 및 성공시 아래 코드 삭제 */
                 Intent intent1 = new Intent(ProgressingMyDataActivity.this, MainActivity.class);
                 startActivity(intent1);
                 finish();
-*/
             }
         });
-    }
-
-    private void setCircularProgressBar() {
-        CircularProgressBar circularProgressBar = findViewById(R.id.circularProgressBar);
-        circularProgressBar.setProgressWithAnimation(65f, 1000L); // =1s
     }
 }

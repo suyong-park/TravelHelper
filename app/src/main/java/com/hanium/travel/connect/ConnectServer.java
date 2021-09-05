@@ -10,7 +10,7 @@ public interface ConnectServer {
     public static String IP_ADDRESS = "http://115.85.180.60/server/";
 
     @FormUrlEncoded
-    @POST("insert2.php")
+    @POST("pctest.php")
     Call<String> sendMyData(
             @Field("movement") boolean[] movement,
             @Field("dest") boolean[] dest,

@@ -74,8 +74,6 @@ public class MyData6Fragment extends Fragment implements ValidationEdit {
                     valueArray[1] = age.getText().toString().trim();
                     valueArray[2] = email.getText().toString().trim();
 
-                    for(int i = 0; i < valueArray.length; i++)
-                        PreferenceManager.setString(requireActivity(), "mydata6-" + i, valueArray[i]);
                     PreferenceManager.setBoolean(requireActivity(), "isFirst6", true);
 
                     Intent intent = new Intent(requireActivity(), ProgressingMyDataActivity.class);
